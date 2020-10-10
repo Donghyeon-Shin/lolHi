@@ -15,8 +15,19 @@ public class ArticleService {
 	private ArticleDao articleDao;
 
 	public List<Article> getArticles() {
-
+		
+		// TODO Auto-generated method stub
 		return articleDao.getArticles();
+		
+	}
+
+	public Article getArticle(int id) {
+		return articleDao.getArticle(id);
+	}
+
+	public void DoDeleteArticle(int id) {
+		// TODO Auto-generated method stub
+		articleDao.doDeleteArticle(id);
 	}
 
 }

@@ -12,7 +12,7 @@
 	
 	<c:forEach items="${articles}" var = "article">
 		<div>
-			번호 : ${article.id }
+			<a href="detail?id=${article.id }">번호 : ${article.id }</a>
 			<br />
 			생성날짜 : ${article.regDate }
 			<br />
