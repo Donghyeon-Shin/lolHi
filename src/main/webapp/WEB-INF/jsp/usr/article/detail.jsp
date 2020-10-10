@@ -19,6 +19,7 @@
 	</ul>
 	
 	<a href="list">돌아가기</a>
+	<a href="modify?id=${article.id}">게시글 수정</a>
 	<a href="doDelete?id=${article.id}">게시글 삭제</a>
 
 </body>

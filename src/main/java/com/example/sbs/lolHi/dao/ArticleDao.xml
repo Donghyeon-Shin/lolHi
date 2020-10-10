@@ -7,17 +7,33 @@
 	<select id="getArticles" resultType="Article">
 		SELECT *
 		FROM article
+		ORDER BY id DESC;
 	</select>
 	
 	<select id="getArticle" resultType="Article" parameterType="int" >
 		SELECT *
 		FROM article
-		WHERE id = ${id}
+		WHERE id = #{id}
 	</select>
 	
 	<delete id="doDeleteArticle" parameterType="int" >
 		DELETE FROM article
-		WHERE id = ${id}
+		WHERE id = #{id}
 	</delete>
 
+	<insert id="write"  parameterType="map">
+		INSERT INTO article
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		title = #{title},
+		body = #{body};
+	</insert>
+
+	<update id="modify" parameterType="map">
+		UPDATE article
+		SET updateDate = NOW(),
+		title = #{title},
+		body = #{body}
+		WHERE id = #{id};
+	</update>
 </mapper>

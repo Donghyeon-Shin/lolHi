@@ -10,6 +10,8 @@
 <body>
 	<h1>게시물 리스트</h1>
 	
+	<a href="write">게시글 생성</a>
+	
 	<c:forEach items="${articles}" var = "article">
 		<div>
 			<a href="detail?id=${article.id }">번호 : ${article.id }</a>
