@@ -12,14 +12,21 @@ import com.example.sbs.lolHi.dto.Article;
 @Service
 public class ArticleService {
 	
-
+	int pageNumbering = 0;
+	
 	@Autowired
 	private ArticleDao articleDao;
 
-	public List<Article> getArticles() {
-	
-		// TODO Auto-generated method stub
-		return articleDao.getArticles();
+	public List<Article> getArticles(int limitCount, int limitFrom) {
+
+		if ( limitFrom > 0 ) {
+			pageNumbering = (limitFrom * 10);
+		} else {
+			pageNumbering = 0;
+		}
+		
+		return articleDao.getArticles(limitCount, pageNumbering);
+		
 		
 	}
 
@@ -39,6 +46,16 @@ public class ArticleService {
 	public void modify(Map<String, Object> param) {
 		articleDao.modify(param);
 		
+	}
+
+	public int getArticlesCount() {
+		
+		return articleDao.getArticlesCount();
+	}
+
+	public List<Article> getArticles(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

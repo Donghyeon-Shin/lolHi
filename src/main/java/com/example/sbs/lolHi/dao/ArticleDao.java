@@ -11,8 +11,9 @@ import com.example.sbs.lolHi.dto.Article;
 @Mapper
 public interface ArticleDao {
 
-	List<Article> getArticles();
 
+	List<Article> getArticles(int limitCount, int pageNumbering);
+	
 	Article getArticle(@Param("id") int id);
 
 	void doDeleteArticle(@Param("id") int id);
@@ -20,6 +21,12 @@ public interface ArticleDao {
 	void write(Map<String, Object> param);
 
 	void modify(Map<String, Object> param);
+
+	int getArticlesCount();
+
+
+
+	
 
 
 }

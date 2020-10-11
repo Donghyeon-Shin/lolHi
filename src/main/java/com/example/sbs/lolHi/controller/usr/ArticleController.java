@@ -1,13 +1,10 @@
 package com.example.sbs.lolHi.controller.usr;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,11 +20,29 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("usr/article/list")
-	public String showList(Model model) {
+	public String showList(@RequestParam("page") int page,Model model) {
+			
+		int pageItmesCount = 10;
 		
-		List<Article> articles = articleService.getArticles();
+		int limitCount = pageItmesCount;
+		
+		int limitFrom =  ( page - 1 );
+		
+		List<Article> articles = articleService.getArticles(limitCount, limitFrom);
+		
+		int totalCount = articleService.getArticlesCount();
+		
+		int totalPage = (int)Math.ceil((double)totalCount / pageItmesCount);
 		
 		model.addAttribute("articles", articles);
+		
+		model.addAttribute("page", page);
+		
+		model.addAttribute("totalCount", totalCount);
+		
+		model.addAttribute("totalPage", totalPage);
+		
+		
 		
 		return "usr/article/list";
 	}
@@ -65,7 +80,7 @@ public class ArticleController {
 		
 		int id = Util.getAsInt(param.get("id"));
 		
-		return String.format("<script> alert('%d번 게시글이 생성되었습니다.'); location.replace('list')</script>", id);
+		return String.format("<script> alert('%d번 게시글이 생성되었습니다.'); location.replace('list?page=1')</script>", id);
 	}
 	
 	@RequestMapping("usr/article/modify")
@@ -84,6 +99,6 @@ public class ArticleController {
 		
 		articleService.modify(param);
 
-		return String.format("<script> alert('%s글이 수정되었습니다.'); location.replace('list')</script>", param.get("id"));
+		return String.format("<script> alert('%s글이 수정되었습니다.'); location.replace('list?page=1')</script>", param.get("id"));
 	}
 }

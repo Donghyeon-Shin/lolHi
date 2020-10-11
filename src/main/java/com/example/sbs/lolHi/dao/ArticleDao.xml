@@ -4,10 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sbs.lolHi.dao.ArticleDao">
 
-	<select id="getArticles" resultType="Article">
+	<select id="getArticles" resultType="Article" parameterType="int">
 		SELECT *
 		FROM article
 		ORDER BY id DESC
+		<if test="limitCount != null">
+			LIMIT #{pageNumbering}, #{limitCount}
+		</if>
 	</select>
 	
 	<select id="getArticle" resultType="Article" parameterType="int" >
@@ -36,4 +39,9 @@
 		body = #{body}
 		WHERE id = #{id};
 	</update>
+	
+	<select id="getArticlesCount" resultType="int" >
+		SELECT COUNT(*)
+		FROM article
+	</select>
 </mapper>
