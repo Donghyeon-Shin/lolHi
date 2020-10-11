@@ -1,5 +1,6 @@
 package com.example.sbs.lolHi.controller.usr;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.sbs.lolHi.dto.Article;
 import com.example.sbs.lolHi.service.ArticleService;
+import com.example.sbs.lolHi.util.Util;
 
 @Controller
 public class ArticleController {
@@ -61,7 +63,9 @@ public class ArticleController {
 
 		articleService.write(param);
 		
-		return "<script> alert('게시글이 생성되었습니다.'); location.replace('list')</script>";
+		int id = Util.getAsInt(param.get("id"));
+		
+		return String.format("<script> alert('%d번 게시글이 생성되었습니다.'); location.replace('list')</script>", id);
 	}
 	
 	@RequestMapping("usr/article/modify")

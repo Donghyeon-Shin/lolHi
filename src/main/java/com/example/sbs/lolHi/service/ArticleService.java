@@ -11,12 +11,13 @@ import com.example.sbs.lolHi.dto.Article;
 
 @Service
 public class ArticleService {
+	
 
 	@Autowired
 	private ArticleDao articleDao;
 
 	public List<Article> getArticles() {
-		
+	
 		// TODO Auto-generated method stub
 		return articleDao.getArticles();
 		
