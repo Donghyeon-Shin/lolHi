@@ -20,35 +20,19 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("usr/article/list")
-	public String showList(@RequestParam("page") int page,Model model) {
-			
-		int pageItmesCount = 10;
-		
-		int limitCount = pageItmesCount;
-		
-		int limitFrom =  ( page - 1 );
-		
-		List<Article> articles = articleService.getArticles(limitCount, limitFrom);
-		
-		int totalCount = articleService.getArticlesCount();
-		
-		int totalPage = (int)Math.ceil((double)totalCount / pageItmesCount);
+	public String showList(Model model, @RequestParam Map<String, Object> param) {
+				
+		List<Article> articles = articleService.getArticles(param);
 		
 		model.addAttribute("articles", articles);
 		
-		model.addAttribute("page", page);
-		
-		model.addAttribute("totalCount", totalCount);
-		
-		model.addAttribute("totalPage", totalPage);
-		
-		
+		model.addAllAttributes(param);
 		
 		return "usr/article/list";
 	}
 	
 	@RequestMapping("usr/article/detail")
-	public String showDetail(@RequestParam("id") int id,Model model) {
+	public String showDetail(Model model, @RequestParam("id") int id) {
 
 		Article article = articleService.getArticle(id);
 		
@@ -84,7 +68,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/modify")
-	public String showModify(@RequestParam("id") int id, Model model) {
+	public String showModify(Model model, @RequestParam("id") int id) {
 
 		Article article = articleService.getArticle(id);
 		

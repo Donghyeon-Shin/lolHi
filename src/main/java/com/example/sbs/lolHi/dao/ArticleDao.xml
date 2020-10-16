@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sbs.lolHi.dao.ArticleDao">
 
-	<select id="getArticles" resultType="Article" parameterType="int">
+	<select id="getArticles" resultType="Article">
 		SELECT *
 		FROM article
 		ORDER BY id DESC
-		<if test="limitCount != null">
-			LIMIT #{pageNumbering}, #{limitCount}
+		<if test="limitFrom != null and limitTake != null">
+			LIMIT #{limitFrom}, #{limitTake}
 		</if>
 	</select>
 	

@@ -12,7 +12,7 @@ import com.example.sbs.lolHi.dto.Article;
 public interface ArticleDao {
 
 
-	List<Article> getArticles(int limitCount, int pageNumbering);
+	List<Article> getArticles(Map<String, Object> param);
 	
 	Article getArticle(@Param("id") int id);
 

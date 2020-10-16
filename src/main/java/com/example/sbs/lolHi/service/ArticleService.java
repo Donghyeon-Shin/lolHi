@@ -8,26 +8,42 @@ import org.springframework.stereotype.Service;
 
 import com.example.sbs.lolHi.dao.ArticleDao;
 import com.example.sbs.lolHi.dto.Article;
+import com.example.sbs.lolHi.util.Util;
 
 @Service
 public class ArticleService {
-	
-	int pageNumbering = 0;
+
 	
 	@Autowired
 	private ArticleDao articleDao;
+	
 
-	public List<Article> getArticles(int limitCount, int limitFrom) {
+	public List<Article> getArticles(Map<String, Object> param) {
 
-		if ( limitFrom > 0 ) {
-			pageNumbering = (limitFrom * 10);
-		} else {
-			pageNumbering = 0;
+		int page = Util.getAsInt(param.get("page"), 1);
+
+		int itemsCountInAPage = Util.getAsInt(param.get("itemsCountInAPage"), 10);
+		
+		if ( itemsCountInAPage > 100 ) {
+			itemsCountInAPage = 100;
+		} else if ( itemsCountInAPage < 1 ){
+			itemsCountInAPage = 1;
 		}
 		
-		return articleDao.getArticles(limitCount, pageNumbering);
+		int totalCount = (int)getArticlesCount();
 		
+		int totalPage = (int)Math.ceil((double)totalCount / itemsCountInAPage);
 		
+		int limitFrom = (page - 1 ) * itemsCountInAPage;
+		
+		int limitTake = itemsCountInAPage;
+		
+		param.put("limitFrom", limitFrom);
+		param.put("limitTake", limitTake);
+		param.put("totalCount", totalCount);
+		param.put("totalPage", totalPage);
+		
+		return articleDao.getArticles(param);
 	}
 
 	public Article getArticle(int id) {
@@ -52,11 +68,5 @@ public class ArticleService {
 		
 		return articleDao.getArticlesCount();
 	}
-
-	public List<Article> getArticles(Map<String, Object> param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }
