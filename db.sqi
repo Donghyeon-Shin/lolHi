@@ -27,3 +27,21 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2';
+
+# member 테이블 생성
+CREATE TABLE `member`(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    loginId CHAR(100) NOT NULL,
+    loginPw CHAR(100) NOT NULL,
+    `name` CHAR(10) NOT NULL
+);
+
+# member 생성
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'sbs123',
+loginPw = 'sbs123414',
+`name` = 'admin';

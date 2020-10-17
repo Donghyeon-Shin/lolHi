@@ -13,10 +13,10 @@ public class MemeberService {
 
 	@Autowired
 	private MemberDao memberDao;
-
-	public Member join(Map<String, Object> param) {
+	
+	public Member login(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return memberDao.join(param);
+		return memberDao.login(param);
 	}
 
 

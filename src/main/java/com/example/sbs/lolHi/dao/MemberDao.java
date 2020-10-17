@@ -9,6 +9,6 @@ import com.example.sbs.lolHi.dto.Member;
 @Mapper
 public interface MemberDao {
 
-	Member join(Map<String, Object> param);
+	Member login(Map<String, Object> param);
 
 }

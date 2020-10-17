@@ -19,17 +19,17 @@ public class MemberController {
 	@Autowired
 	private MemeberService memeberService;
 
-	@RequestMapping("usr/member/join")
-	public String showJoin() {
+	@RequestMapping("usr/member/login")
+	public String showLogin() {
 				
-		return "usr/member/join";
+		return "usr/member/login";
 	}
 	
-	@RequestMapping("usr/member/doJoin")
+	@RequestMapping("usr/member/doLogin")
 	@ResponseBody
-	public String showDoJoin(@RequestParam Map<String, Object> param) {
+	public String showDoLogin(@RequestParam Map<String, Object> param) {
 				
-		Member member = memeberService.join(param);
+		Member member = memeberService.login(param);
 		
 		if ( member == null ) {
 			return "<script>alert('존재하지 않는 회원입니다'); location.replace('join')</script>";

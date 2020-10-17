@@ -5,7 +5,7 @@
 	<c:set var = "pageName" value = "로그인" />
 	<%@ include file = "../../part/head.jspf" %>
 	
-	<form action="./doJoin" method="POST">
+	<form action="./doLogin" method="POST">
 		
 		<table>
 		
