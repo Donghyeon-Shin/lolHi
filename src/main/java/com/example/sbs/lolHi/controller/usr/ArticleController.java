@@ -20,13 +20,54 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("usr/article/list")
-	public String showList(Model model, @RequestParam Map<String, Object> param) {
+	public String showList(Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType) {
 				
 		List<Article> articles = articleService.getArticles(param);
+
+		int totalCount = (int)articleService.getArticlesCount();
+		int itemsCountInAPage = 10;
+		
+		int totalPage = (int)Math.ceil((double)totalCount / itemsCountInAPage);
+		
+		int page = Util.getAsInt(param.get("page"), 1);
+		
+		int pageMenuSize = 5;
+		
+		int pageMenuStart = page - pageMenuSize ;
+		
+		if ( pageMenuStart < 0 ) {
+			pageMenuStart = 1;
+		}
+		
+		int pageMenuEnd = page + pageMenuSize;
+		
+		if ( pageMenuEnd > totalPage ) {
+			pageMenuEnd = totalPage;
+		}
 		
 		model.addAttribute("articles", articles);
-		
 		model.addAllAttributes(param);
+		
+		param.put("itemsCountInAPage", itemsCountInAPage);
+		
+		model.addAttribute("pageMenuSize", pageMenuSize);
+		model.addAttribute("pageMenuStart", pageMenuStart);
+		model.addAttribute("pageMenuEnd", pageMenuEnd);
+		model.addAttribute("page", page);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("totalPage", totalPage);
+		
+		if ( searchKeyword != null ) {
+			searchKeyword = searchKeyword.trim();
+		}
+		
+		if ( searchType != null ) {
+			searchType = searchType.trim();
+		}
+		
+		param.put("searchKeyword", searchKeyword);
+		
+		param.put("searchType", searchType);
 		
 		return "usr/article/list";
 	}

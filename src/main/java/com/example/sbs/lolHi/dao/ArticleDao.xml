@@ -7,6 +7,18 @@
 	<select id="getArticles" resultType="Article">
 		SELECT *
 		FROM article
+		<choose>
+			<when test="searchType == 'title'">
+				WHERE title LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'body'">
+				WHERE body LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'titleAndBody'">
+				WHERE title LIKE CONCAT('%',#{searchKeyword},'%') OR
+				body LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+		</choose>
 		ORDER BY id DESC
 		<if test="limitFrom != null and limitTake != null">
 			LIMIT #{limitFrom}, #{limitTake}

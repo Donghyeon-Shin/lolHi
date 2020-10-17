@@ -30,18 +30,12 @@ public class ArticleService {
 			itemsCountInAPage = 1;
 		}
 		
-		int totalCount = (int)getArticlesCount();
-		
-		int totalPage = (int)Math.ceil((double)totalCount / itemsCountInAPage);
-		
 		int limitFrom = (page - 1 ) * itemsCountInAPage;
 		
 		int limitTake = itemsCountInAPage;
 		
 		param.put("limitFrom", limitFrom);
 		param.put("limitTake", limitTake);
-		param.put("totalCount", totalCount);
-		param.put("totalPage", totalPage);
 		
 		return articleDao.getArticles(param);
 	}

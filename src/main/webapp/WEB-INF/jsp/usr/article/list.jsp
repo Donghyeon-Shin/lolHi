@@ -21,6 +21,33 @@
 	
 	</div>
 	
+	<div class="con">
+		<form action="" name="searchForm">
+		<input type="hidden" name="page" value="1">
+		<select name="searchType">
+		
+			<option value="title">제목</option>
+			<option value="body">내용</option>
+			<option value="titleAndBody">제목+내용</option>
+			
+		</select>
+		
+		<script>
+			if ( typeof param.searchType == 'undefined' ) {
+				param.searchType = 'title';
+			}
+		
+			$('form[name="searchForm"] select[name="searchType"]').val(param.searchType);
+		</script>
+		
+		<input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요." value="${param.searchKeyword}">
+		
+		<input type="submit" value="검색">
+		
+		</form>
+	</div>
+	
+	
 	<c:forEach items="${articles}" var = "article">
 		<div>
 			<a href="detail?id=${article.id }">번호 : ${article.id }</a>
@@ -40,57 +67,30 @@
 	
 	</c:forEach>
 
-
-	<div class="page-menu text-align-center margin-top-30">
+	<style>
+		.selected{
+			color : red;
+		}
+	</style>
 	
-		<a href="list?page=1">◀◀</a>
+	<c:set var = "goFirstBtnNeedToShow" value = "${page > pageMenuSize + 1 }"/>
+	<c:set var = "goLastBtnNeedToShow" value = "true"/>
 	
-		<c:forEach begin="1" end="${totalPage}" var="currentPage">
+	<c:if test = "${goFirstBtnNeedToShow}">
+		<a href="?page=1">◀◀</a>	
+	</c:if>
+	
+	<c:forEach var = "i" begin = "${pageMenuStart}" end = "${pageMenuEnd }">
+		<c:set var = "className" value = "${i == page ? 'selected' : ''}"/>
+		<a class = "className" href="?page=${i}">${i}</a>
 		
-			<c:forEach  begin="1" end = "4" var = "number">
-				
-				<c:if test="${currentPage == page}">
-					
-					<c:if test="${currentPage - 5 + number >= 1}">
-					
-						<a href="list?page=${currentPage - 5 + number}">${currentPage - 5 + number}</a>
-						
-					</c:if>
-					
-					
-				</c:if>
-				
-			</c:forEach>
-			
-			<c:if test="${currentPage == page}">
-					
-					<a href="list?page=${currentPage}">${currentPage}</a>
-					
-			</c:if>
-		
-			<c:forEach  begin="1" end = "5" var = "number">
-				
-				<c:if test="${currentPage == page}">
-					
-					<c:if test="${currentPage + number <= totalPage}">
-					
-						<a href="list?page=${currentPage + number}">${currentPage + number}</a>
-					
-					</c:if>
-					
-				</c:if>
-				
-			</c:forEach>
-			
-
-			
-		</c:forEach>
-					
-				
-					
-		<a href="list?page=${totalPage}">▶▶</a>
+		<c:if test = "${ i == totalPage }">
+			<c:set var = "goLastBtnNeedToShow" value = "false"/>
+		</c:if>
+	</c:forEach>
 	
-	</div>
-
+	<c:if test = "${goLastBtnNeedToShow}">
+		<a href="?page=${totalPage }">▶▶</a>	
+	</c:if>
 	
 	<%@ include file="../../part/foot.jspf"%> 
