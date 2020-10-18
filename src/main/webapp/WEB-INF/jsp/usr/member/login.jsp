@@ -5,7 +5,42 @@
 	<c:set var = "pageName" value = "로그인" />
 	<%@ include file = "../../part/head.jspf" %>
 	
-	<form action="./doLogin" method="POST">
+	<script>
+		var loginFormSubmitDone = false;
+	
+		function loginFormSubmit(form) {
+
+				if ( loginFormSubmitDone ) {
+						alert('처리중입니다.');
+						return;
+					}
+
+				form.loginId.value = form.loginId.value.trim();
+
+				if ( form.loginId.value.length == 0 ) {
+							
+						alert('로그인 아이디를 입력해주세요.');
+
+						form.loginId.focus();
+						return;
+					}
+
+				form.loginPw.value = form.loginPw.value.trim();
+
+				if ( form.loginPw.value.length == 0 ) {
+							
+						alert('로그인 비밀번호를 입력해주세요.');
+
+						form.loginPw.focus();
+						return;
+					}
+
+				form.submit();
+				loginFormSubmitDone = true;
+			}
+	</script>
+	
+	<form action="./doLogin" method="POST" onclick="loginFormSubmit(this); return false">
 		
 		<table>
 		
@@ -18,11 +53,6 @@
 				<tr>
 					<th>비밀번호</th>
 					<td><input type="text" name = "loginPw" placeholder="비밀번호를 입력해주세요."/></td>
-				</tr>
-				
-				<tr>
-					<th>이름</th>
-					<td><input type="text" name = "name" placeholder="이름을 입력해주세요."/></td>
 				</tr>
 				
 				<tr>

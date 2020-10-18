@@ -11,4 +11,6 @@ public interface MemberDao {
 
 	Member login(Map<String, Object> param);
 
+	void join(Map<String, Object> param);
+
 }

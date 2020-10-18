@@ -8,8 +8,16 @@
 		SELECT *
 		FROM member
 		WHERE loginId = ${loginId} AND
-		loginPw = ${loginPw} AND
-		`name` = ${name};
+		loginPw = ${loginPw};
 	</select>
+
+	<insert id="join" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO member
+		SET regDate = now(),
+		updateDate = now(),
+		loginId = ${loginId},
+		loginPw = ${loginPw},
+		`name` = ${name}
+	</insert>
 	
 </mapper>

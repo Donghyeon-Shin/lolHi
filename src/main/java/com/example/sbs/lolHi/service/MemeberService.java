@@ -19,5 +19,8 @@ public class MemeberService {
 		return memberDao.login(param);
 	}
 
+	public void join(Map<String, Object> param) {
+		memberDao.join(param);
+	}
 
 }
