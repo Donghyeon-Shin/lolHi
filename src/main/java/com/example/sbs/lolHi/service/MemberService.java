@@ -9,7 +9,7 @@ import com.example.sbs.lolHi.dao.MemberDao;
 import com.example.sbs.lolHi.dto.Member;
 
 @Service
-public class MemeberService {
+public class MemberService {
 
 	@Autowired
 	private MemberDao memberDao;
@@ -21,6 +21,17 @@ public class MemeberService {
 
 	public void join(Map<String, Object> param) {
 		memberDao.join(param);
+	}
+
+	public boolean isJoinAvailableLoginId(String loginId) {
+
+		Member member = memberDao.getMemberByLoginId(loginId);
+
+		if ( member == null ) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

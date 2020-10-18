@@ -5,10 +5,20 @@
 	<c:set var = "pageName" value = "게시물 작성" />
 	<%@ include file = "../../part/head.jspf" %>
 	
+	<c:if test="${loginedMemberId == null }">
+		
+		<script>
+			alert('로그인 후 이용해 주세요.');
+			history.back();
+		</script>
+		
+	</c:if>
+	
 	<form action="./doWrite" method="POST">
+	
+		<input type="hidden" name = "memberId" value="${loginedMemberId}"/>
 		
 		<table>
-		
 			<tbody>
 				<tr>
 					<th>제목</th>

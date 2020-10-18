@@ -39,6 +39,7 @@
 	<insert id="write"  parameterType="map" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article
 		SET regDate = NOW(),
+		memberId = ${loginedMemberId},
 		updateDate = NOW(),
 		title = #{title},
 		body = #{body};

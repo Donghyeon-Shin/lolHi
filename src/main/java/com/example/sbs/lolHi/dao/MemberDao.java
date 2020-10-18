@@ -3,6 +3,7 @@ package com.example.sbs.lolHi.dao;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.sbs.lolHi.dto.Member;
 
@@ -12,5 +13,7 @@ public interface MemberDao {
 	Member login(Map<String, Object> param);
 
 	void join(Map<String, Object> param);
+
+	Member getMemberByLoginId(@Param("loginId") String loginId);
 
 }

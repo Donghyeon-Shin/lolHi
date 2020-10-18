@@ -52,6 +52,8 @@
 		<div>
 			<a href="detail?id=${article.id }">번호 : ${article.id }</a>
 			<br />
+			작성자 : ${article.memberId}
+			<br />
 			생성날짜 : ${article.regDate }
 			<br />
 			갱신날짜 : ${article.updateDate }
@@ -61,7 +63,9 @@
 			내용 : ${article.body }
 			<br />
 			
-			<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false" href="doDelete?id=${article.id}">삭제</a>
+			<c:if test="${article.memberId == loginedMemberId}">
+				<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false" href="doDelete?id=${article.id}">삭제</a>
+			</c:if>
 		</div>
 		<hr />
 	

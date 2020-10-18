@@ -2,6 +2,9 @@ package com.example.sbs.lolHi.controller.usr;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +23,16 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("usr/article/list")
-	public String showList(Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType) {
+	public String showList(Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType, HttpSession session) {
+		
+		int loginedMemberId = 0;
+		
+		if ( session.getAttribute("loginedMemberId") != null ) {
+			loginedMemberId = (int)session.getAttribute("loginedMemberId");
+			model.addAttribute("loginedMemberId", loginedMemberId);
+		} 
+
+	
 				
 		List<Article> articles = articleService.getArticles(param);
 
@@ -73,8 +85,15 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/detail")
-	public String showDetail(Model model, @RequestParam("id") int id) {
+	public String showDetail(Model model, @RequestParam("id") int id, HttpSession session) {
 
+		int loginedMemberId = 0;
+		
+		if ( session.getAttribute("loginedMemberId") != null ) {
+			loginedMemberId = (int)session.getAttribute("loginedMemberId");
+			model.addAttribute("loginedMemberId", loginedMemberId);
+		} 
+		
 		Article article = articleService.getArticle(id);
 		
 		model.addAttribute("article", article);
@@ -92,15 +111,26 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/write")
-	public String showWrite() {
+	public String showWrite(HttpSession session, Model model) {
+		
+		int loginedMemberId = 0;
+		
+		if ( session.getAttribute("loginedMemberId") != null ) {
+			loginedMemberId = (int)session.getAttribute("loginedMemberId");
+			model.addAttribute("loginedMemberId", loginedMemberId);
+		}
 
 		return "usr/article/write";
 	}
 	
 	@RequestMapping("usr/article/doWrite")
 	@ResponseBody
-	public String showDoWrite(@RequestParam Map<String, Object> param) {
+	public String showDoWrite(@RequestParam Map<String, Object> param, HttpSession session) {
 
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		
+		param.put("loginedMemberId", loginedMemberId);
+		
 		articleService.write(param);
 		
 		int id = Util.getAsInt(param.get("id"));

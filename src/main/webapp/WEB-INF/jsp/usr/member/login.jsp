@@ -5,6 +5,8 @@
 	<c:set var = "pageName" value = "로그인" />
 	<%@ include file = "../../part/head.jspf" %>
 	
+	<a href="../article/list">리스트</a>
+	
 	<script>
 		var loginFormSubmitDone = false;
 	
@@ -36,11 +38,13 @@
 					}
 
 				form.submit();
+				
 				loginFormSubmitDone = true;
 			}
 	</script>
 	
-	<form action="./doLogin" method="POST" onclick="loginFormSubmit(this); return false">
+	<form action="doLogin" method="POST"
+		onsubmit="joinFormSubmit(this); return false;">
 		
 		<table>
 		

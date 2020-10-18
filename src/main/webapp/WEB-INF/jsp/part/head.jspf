@@ -11,8 +11,11 @@
 <body>
 
 	<h1 class="con">${pageName}</h1>
-
+	
+	<div>${loginedMemberId}</div>
+	
 	<c:if test="${loginedMemberId != null}">
+		<div>${loginedMemberName} 님</div>
 		<a href="../member/doLogout">로그아웃</a>
 	</c:if>
 	

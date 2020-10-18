@@ -15,7 +15,10 @@
 	</ul>
 	
 	<a href="list?page=1">돌아가기</a>
-	<a href="modify?id=${article.id}">게시글 수정</a>
+	
+	<c:if test="${ article.memberId == loginedMemberId }">
+		<a href="modify?id=${article.id}">게시글 수정</a>
+	</c:if>	
 	<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false" href="doDelete?id=${article.id}">게시글 삭제</a>
 
 	<%@ include file = "../../part/foot.jspf" %>

@@ -67,7 +67,8 @@
 			}
 	</script>
 	
-	<form action="./doJoin" method="POST" onclick = " joinFormSubmit(this); return false;">
+		<form action="doJoin" method="POST"
+		onsubmit="joinFormSubmit(this); return false;">
 		
 		<table>
 		
