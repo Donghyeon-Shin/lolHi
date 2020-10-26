@@ -191,6 +191,14 @@ public class ArticleController {
 
 		Article article = articleService.getArticle(id);
 		
+		
+		if ( article.getMemberId() != loginedMemberId ) {
+			
+			model.addAttribute("msg", "권한이 없습니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
 		model.addAttribute("article", article);
 		
 		return "usr/article/modify";
@@ -212,12 +220,20 @@ public class ArticleController {
 			model.addAttribute("replaceUri", "/usr/member/login");
 			return "common/redirect";
 		}
-
+		
+		int id = Util.getAsInt(param.get("id"));
+		
+		Article article = articleService.getArticle(id);
+		
+		if ( article.getMemberId() != loginedMemberId ) {
+			
+			model.addAttribute("msg", "권한이 없습니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
 		
 		articleService.modify(param);
 		
-		int id = Util.getAsInt(param.get("id"));
-
 		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
 		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
 		return "common/redirect";
