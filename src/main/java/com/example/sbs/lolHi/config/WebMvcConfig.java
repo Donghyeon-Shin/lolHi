@@ -19,7 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	// 이 함수는 인터셉터를 적용하는 역할을 합니다.
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**");
+		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/error");
 		//registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/usr/article/list");
 	}
 	

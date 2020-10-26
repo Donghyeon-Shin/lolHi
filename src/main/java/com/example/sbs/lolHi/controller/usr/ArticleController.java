@@ -32,8 +32,7 @@ public class ArticleController {
 			model.addAttribute("loginedMemberId", loginedMemberId);
 		} 
 
-	
-				
+
 		List<Article> articles = articleService.getArticles(param);
 
 		int totalCount = (int)articleService.getArticlesCount();

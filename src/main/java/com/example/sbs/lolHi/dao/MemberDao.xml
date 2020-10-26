@@ -7,8 +7,8 @@
 	<select id="login" resultType="Member" parameterType="Map">
 		SELECT *
 		FROM member
-		WHERE loginId = ${loginId} AND
-		loginPw = ${loginPw};
+		WHERE loginId = #{loginId} AND
+		loginPw = #{loginPw};
 	</select>
 
 	<insert id="join" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
@@ -29,7 +29,7 @@
 	<select id="getMemberById" resultType="Member" parameterType = "int">
 		SELECT *
 		FROM member
-		WHERE id =  #{id}
+		WHERE id = #{id}
 	</select>
 	
 </mapper>
