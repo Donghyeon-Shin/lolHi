@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.sbs.lolHi.dto.Article;
 import com.example.sbs.lolHi.service.ArticleService;
@@ -102,12 +101,13 @@ public class ArticleController {
 	}
 
 	@RequestMapping("usr/article/doDelete")
-	@ResponseBody
-	public String showDoDelete(@RequestParam("id") int id) {
+	public String showDoDelete(@RequestParam("id") int id, Model model) {
 
 		articleService.DoDeleteArticle(id);
 		
-		return String.format("<script> alert('%d번 글이 삭제되었습니다.'); location.replace('list')</script>", id);
+		model.addAttribute("msg", String.format("%d번 글이 삭제되었습니다.", id));
+		model.addAttribute("replaceUri", "/usr/article/list");
+		return "common/redirect";
 	}
 	
 	@RequestMapping("usr/article/write")
@@ -120,12 +120,17 @@ public class ArticleController {
 			model.addAttribute("loginedMemberId", loginedMemberId);
 		}
 
+		if ( loginedMemberId == 0 ) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+			return "common/redirect";
+		}
+		
 		return "usr/article/write";
 	}
 	
 	@RequestMapping("usr/article/doWrite")
-	@ResponseBody
-	public String showDoWrite(@RequestParam Map<String, Object> param, HttpSession session) {
+	public String showDoWrite(@RequestParam Map<String, Object> param, HttpSession session, Model model) {
 
 		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		
@@ -135,7 +140,9 @@ public class ArticleController {
 		
 		int id = Util.getAsInt(param.get("id"));
 		
-		return String.format("<script> alert('%d번 게시글이 생성되었습니다.'); location.replace('list?page=1')</script>", id);
+		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
+		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
+		return "common/redirect";
 	}
 	
 	@RequestMapping("usr/article/modify")
@@ -149,11 +156,14 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/doModify")
-	@ResponseBody
-	public String showDoModify(@RequestParam Map<String, Object> param) {
+	public String showDoModify(@RequestParam Map<String, Object> param, Model model) {
 		
 		articleService.modify(param);
+		
+		int id = Util.getAsInt(param.get("id"));
 
-		return String.format("<script> alert('%s글이 수정되었습니다.'); location.replace('list?page=1')</script>", param.get("id"));
+		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
+		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
+		return "common/redirect";
 	}
 }

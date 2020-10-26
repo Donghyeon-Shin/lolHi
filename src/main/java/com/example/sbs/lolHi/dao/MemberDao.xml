@@ -15,9 +15,9 @@
 		INSERT INTO member
 		SET regDate = now(),
 		updateDate = now(),
-		loginId = ${loginId},
-		loginPw = ${loginPw},
-		`name` = ${name}
+		loginId = #{loginId},
+		loginPw = #{loginPw},
+		`name` = #{name}
 	</insert>
 	
 	<select id="getMemberByLoginId" resultType="Member">
