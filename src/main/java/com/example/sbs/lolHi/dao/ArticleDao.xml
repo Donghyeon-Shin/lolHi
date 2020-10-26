@@ -38,19 +38,39 @@
 
 	<insert id="write"  parameterType="map" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article
-		SET regDate = NOW(),
-		memberId = ${loginedMemberId},
-		updateDate = NOW(),
-		title = #{title},
-		body = #{body};
+		<set>
+			regDate = NOW(),
+			updateDate = NOW(),
+			<if test="title != null">
+				title = #{title},
+			</if>
+			
+			<if test="body != null">
+				body = #{body},
+			</if>
+			
+			<if test="memberId != null">
+				memberId = #{loginedMemberId},
+			</if>
+		</set>
 	</insert>
 
 	<update id="modify" parameterType="map">
 		UPDATE article
-		SET updateDate = NOW(),
-		title = #{title},
-		body = #{body}
-		WHERE id = #{id};
+		
+		<set>
+			updateDate = NOW(),
+			
+			<if test="title != null">
+				title = #{title},
+			</if>
+			
+			<if test="body != null">
+				body = #{body},
+			</if>
+			
+		</set>
+		WHERE id = #{id}
 	</update>
 	
 	<select id="getArticlesCount" resultType="int" >
