@@ -61,7 +61,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("usr/member/doLogin")
-	public String showDoLogin(@RequestParam Map<String, Object> param, HttpSession session, Model model) {
+	public String showDoLogin(HttpSession session, Model model, @RequestParam Map<String, Object> param ) {
 
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 

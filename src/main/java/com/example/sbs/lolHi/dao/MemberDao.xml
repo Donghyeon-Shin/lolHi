@@ -20,10 +20,16 @@
 		`name` = #{name}
 	</insert>
 	
-	<select id="getMemberByLoginId" resultType="Member">
+	<select id="getMemberByLoginId" resultType="Member" parameterType="String">
 		SELECT *
 		FROM member 
 		WHERE loginId = #{loginId}
+	</select>
+	
+	<select id="getMemberById" resultType="Member" parameterType = "int">
+		SELECT *
+		FROM member
+		WHERE id =  #{id}
 	</select>
 	
 </mapper>

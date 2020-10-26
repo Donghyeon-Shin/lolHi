@@ -34,4 +34,9 @@ public class MemberService {
 		return false;
 	}
 
+	public Member getMemberById(int id) {
+		// TODO Auto-generated method stub
+		return memberDao.getMemberById(id);
+	}
+
 }

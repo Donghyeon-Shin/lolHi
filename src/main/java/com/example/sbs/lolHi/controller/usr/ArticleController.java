@@ -3,6 +3,7 @@ package com.example.sbs.lolHi.controller.usr;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("usr/article/list")
-	public String showList(Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType, HttpSession session) {
+	public String showList( HttpSession session, Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType ) {
 		
 		int loginedMemberId = 0;
 		
@@ -84,7 +85,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/detail")
-	public String showDetail(Model model, @RequestParam("id") int id, HttpSession session) {
+	public String showDetail( HttpSession session, Model model, @RequestParam("id") int id) {
 
 		int loginedMemberId = 0;
 		
@@ -101,17 +102,13 @@ public class ArticleController {
 	}
 
 	@RequestMapping("usr/article/doDelete")
-	public String showDoDelete(@RequestParam("id") int id, Model model, HttpSession session) {
+	public String showDoDelete( HttpServletRequest req, @RequestParam("id") int id, Model model) {
 		
-		int loginedMemberId = 0;
+		int loginedMemberId = (int) req.getAttribute("isLogined");
 		
-
-		if ( session.getAttribute("loginedMemberId") != null ) {
-			loginedMemberId = (int)session.getAttribute("loginedMemberId");
-			model.addAttribute("loginedMemberId", loginedMemberId);
-		}
-
-		if ( loginedMemberId == 0 ) {
+		boolean isLogined = (boolean) req.getAttribute("isLogined");;
+		
+		if ( isLogined == false ) {
 			model.addAttribute("msg", "로그인 후 이용해주세요.");
 			model.addAttribute("replaceUri", "/usr/member/login");
 			return "common/redirect";
@@ -153,7 +150,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/doWrite")
-	public String showDoWrite(@RequestParam Map<String, Object> param, HttpSession session, Model model) {
+	public String showDoWrite(HttpSession session,  Model model, @RequestParam Map<String, Object> param) {
 
 		int loginedMemberId = 0;
 		
@@ -182,7 +179,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/modify")
-	public String showModify(Model model, @RequestParam("id") int id, HttpSession session) {
+	public String showModify(HttpSession session, Model model, @RequestParam("id") int id) {
 		
 		int loginedMemberId = 0;
 		
@@ -214,7 +211,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/doModify")
-	public String showDoModify(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+	public String showDoModify(HttpSession session,  Model model, @RequestParam Map<String, Object> param ) {
 		
 		int loginedMemberId = 0;
 		
