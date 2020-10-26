@@ -116,6 +116,15 @@ public class ArticleController {
 			model.addAttribute("replaceUri", "/usr/member/login");
 			return "common/redirect";
 		}
+		
+		Article article = articleService.getArticle(id);
+		
+		if ( article.getMemberId() != loginedMemberId ) {
+			
+			model.addAttribute("msg", "권한이 없습니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
 
 		articleService.DoDeleteArticle(id);
 		
