@@ -33,9 +33,9 @@ public class ArticleController {
 		} 
 
 
-		List<Article> articles = articleService.getArticles(param);
+		List<Article> articles = articleService.getForPrintArticlesById(param);
 
-		int totalCount = (int)articleService.getArticlesCount();
+		int totalCount = (int)articleService.getTotalCount();
 		int itemsCountInAPage = 10;
 		
 		int totalPage = (int)Math.ceil((double)totalCount / itemsCountInAPage);
@@ -93,7 +93,7 @@ public class ArticleController {
 			model.addAttribute("loginedMemberId", loginedMemberId);
 		} 
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		model.addAttribute("article", article);
 		
@@ -105,7 +105,7 @@ public class ArticleController {
 		
 		int loginedMemberId = (int) req.getAttribute("isLogined");
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		if ( article.getMemberId() != loginedMemberId ) {
 			
@@ -114,7 +114,7 @@ public class ArticleController {
 			return "common/redirect";
 		}
 
-		articleService.DoDeleteArticle(id);
+		articleService.doDeleteArticleById(id);
 		
 		model.addAttribute("msg", String.format("%d번 글이 삭제되었습니다.", id));
 		model.addAttribute("replaceUri", "/usr/article/list");
@@ -149,7 +149,7 @@ public class ArticleController {
 		
 		int loginedMemberId =  (int)req.getAttribute("loginedMemberId");;
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		
 		if ( article.getMemberId() != loginedMemberId ) {
@@ -171,7 +171,7 @@ public class ArticleController {
 		
 		int id = Util.getAsInt(param.get("id"));
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		if ( article.getMemberId() != loginedMemberId ) {
 			

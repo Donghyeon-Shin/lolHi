@@ -89,7 +89,6 @@ public class MemberController {
 		}
 
 		session.setAttribute("loginedMemberId", member.getId());
-		session.setAttribute("loginedMemberName", member.getName());
 
 		model.addAttribute("msg", String.format("%s님 환영합니다.", member.getName()));
 		model.addAttribute("replaceUri", "../article/list");
@@ -102,7 +101,6 @@ public class MemberController {
 		
 
 		session.removeAttribute("loginedMemberId");
-		session.removeAttribute("loginedMemberName");
 
 		model.addAttribute("replaceUri", "/usr/article/list");
 		return "common/redirect";

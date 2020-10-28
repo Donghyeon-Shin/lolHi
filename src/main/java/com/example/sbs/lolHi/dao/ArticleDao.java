@@ -12,17 +12,17 @@ import com.example.sbs.lolHi.dto.Article;
 public interface ArticleDao {
 
 
-	List<Article> getArticles(Map<String, Object> param);
+	List<Article> getForPrintArticlesById(Map<String, Object> param);
 	
-	Article getArticle(@Param("id") int id);
+	Article getForPrintArticleById(@Param("id") int id);
 
-	void doDeleteArticle(@Param("id") int id);
+	void doDeleteArticleById(@Param("id") int id);
 
 	void doWrite(Map<String, Object> param);
 
 	void doModify(Map<String, Object> param);
 
-	int getArticlesCount();
+	int getTotalCount();
 
 
 

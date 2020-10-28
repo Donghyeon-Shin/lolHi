@@ -18,7 +18,7 @@ public class ArticleService {
 	private ArticleDao articleDao;
 	
 
-	public List<Article> getArticles(Map<String, Object> param) {
+	public List<Article> getForPrintArticlesById(Map<String, Object> param) {
 
 		int page = Util.getAsInt(param.get("page"), 1);
 
@@ -37,16 +37,16 @@ public class ArticleService {
 		param.put("limitFrom", limitFrom);
 		param.put("limitTake", limitTake);
 		
-		return articleDao.getArticles(param);
+		return articleDao.getForPrintArticlesById(param);
 	}
 
-	public Article getArticle(int id) {
-		return articleDao.getArticle(id);
+	public Article getForPrintArticleById(int id) {
+		return articleDao.getForPrintArticleById(id);
 	}
 
-	public void DoDeleteArticle(int id) {
+	public void doDeleteArticleById(int id) {
 		// TODO Auto-generated method stub
-		articleDao.doDeleteArticle(id);
+		articleDao.doDeleteArticleById(id);
 	}
 
 	public void doWrite(Map<String, Object> param) {
@@ -58,9 +58,9 @@ public class ArticleService {
 		
 	}
 
-	public int getArticlesCount() {
+	public int getTotalCount() {
 		
-		return articleDao.getArticlesCount();
+		return articleDao.getTotalCount();
 	}
 
 

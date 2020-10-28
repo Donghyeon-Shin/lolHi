@@ -50,7 +50,7 @@
 		<div>
 			<a href="detail?id=${article.id }">번호 : ${article.id }</a>
 			<br />
-			작성자 : ${article.memberId}
+			작성자 : ${article.extra.writer}
 			<br />
 			생성날짜 : ${article.regDate }
 			<br />
