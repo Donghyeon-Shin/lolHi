@@ -99,19 +99,6 @@ public class MemberController {
 	@RequestMapping("usr/member/doLogout")
 	public String showDoLogout(HttpSession session, Model model) {
 		
-		int loginedMemberId = 0;
-		
-
-		if ( session.getAttribute("loginedMemberId") != null ) {
-			loginedMemberId = (int)session.getAttribute("loginedMemberId");
-			model.addAttribute("loginedMemberId", loginedMemberId);
-		}
-
-		if ( loginedMemberId == 0 ) {
-			model.addAttribute("msg", "로그인 후 이용해주세요.");
-			model.addAttribute("replaceUri", "/usr/member/login");
-			return "common/redirect";
-		}
 
 		session.removeAttribute("loginedMemberId");
 		session.removeAttribute("loginedMemberName");
