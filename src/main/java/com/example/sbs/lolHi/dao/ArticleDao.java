@@ -18,9 +18,9 @@ public interface ArticleDao {
 
 	void doDeleteArticle(@Param("id") int id);
 
-	void write(Map<String, Object> param);
+	void doWrite(Map<String, Object> param);
 
-	void modify(Map<String, Object> param);
+	void doModify(Map<String, Object> param);
 
 	int getArticlesCount();
 

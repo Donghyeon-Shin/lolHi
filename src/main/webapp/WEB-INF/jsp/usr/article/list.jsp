@@ -5,8 +5,6 @@
 	<c:set var = "pageName" value = "게시물 리스트" />
 	
 	<%@ include file="../../part/head.jspf"%>
-
-	<a href="write">게시글 생성</a>
 	
 	<div class="con margin-top-30">
 	<span>

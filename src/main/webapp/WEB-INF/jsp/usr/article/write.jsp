@@ -39,4 +39,6 @@
 		</table>
 	</form>
 	
+	<a onclick="history.back();">뒤로가기</a>
+	
 	<%@ include file = "../../part/foot.jspf" %>

@@ -49,12 +49,12 @@ public class ArticleService {
 		articleDao.doDeleteArticle(id);
 	}
 
-	public void write(Map<String, Object> param) {
-		articleDao.write(param);
+	public void doWrite(Map<String, Object> param) {
+		articleDao.doWrite(param);
 	}
 
-	public void modify(Map<String, Object> param) {
-		articleDao.modify(param);
+	public void doModify(Map<String, Object> param) {
+		articleDao.doModify(param);
 		
 	}
 
@@ -62,5 +62,6 @@ public class ArticleService {
 		
 		return articleDao.getArticlesCount();
 	}
+
 
 }

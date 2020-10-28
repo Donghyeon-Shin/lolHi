@@ -14,7 +14,7 @@
 		<li>내용 : ${article.body}</li>
 	</ul>
 	
-	<a href="list?page=1">돌아가기</a>
+	<a onclick="history.back();">돌아가기</a>
 	
 	<c:if test="${ article.memberId == loginedMemberId }">
 		<a href="modify?id=${article.id}">게시글 수정</a>

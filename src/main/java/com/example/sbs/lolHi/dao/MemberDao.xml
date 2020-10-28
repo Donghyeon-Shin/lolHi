@@ -32,4 +32,22 @@
 		WHERE id = #{id}
 	</select>
 	
+	<update id="doModify" parameterType="map">
+		UPDATE member
+		
+		<set>
+			updateDate = NOW(),
+			
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			
+			<if test="body != null">
+				body = #{body},
+			</if>
+			
+		</set>
+		WHERE id = #{id}
+	</update>
+	
 </mapper>

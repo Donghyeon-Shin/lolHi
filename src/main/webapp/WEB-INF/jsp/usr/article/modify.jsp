@@ -9,34 +9,24 @@
 
 
 		<input type="hidden" name="id" value="${article.id}" />
-		<table>
+		
+		<div>
+		 	번호 : ${article.id}
+		</div>
+		<div>
+			제목 : <input type="text" name="title" placeholder="제목을 입력해주세요."
+						value="${article.title}" /> 		
+		</div>
 
-			<tbody>
-
-				<tr>
-
-					<th>번호</th>
-					<td>${article.id}</td>
-				</tr>
-
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="title" placeholder="제목을 입력해주세요."
-						value="${article.title}" /></td>
-				</tr>
-
-				<tr>
-					<th>내용</th>
-					<td><textarea name="body" placeholder="내용을 입력해주세요.">${article.body}</textarea></td>
-				</tr>
-
-				<tr>
-					<th>수정</th>
-					<td><input type="submit" value="수정"></td>
-				</tr>
-			</tbody>
-
-		</table>
+		<div>
+			내용 : <textarea name="body" placeholder="내용을 입력해주세요.">${article.body}</textarea>
+		</div>
+		<div>
+			<input type="submit" value="수정">
+		</div>
+		
 	</form>
+	
+	<a onclick="history.back();">뒤로가기</a>
 
 	<%@ include file = "../../part/foot.jspf" %>

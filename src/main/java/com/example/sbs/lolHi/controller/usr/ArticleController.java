@@ -134,7 +134,7 @@ public class ArticleController {
 	
 		param.put("loginedMemberId", loginedMemberId);
 		
-		articleService.write(param);
+		articleService.doWrite(param);
 		
 		int id = Util.getAsInt(param.get("id"));
 		
@@ -180,7 +180,7 @@ public class ArticleController {
 			return "common/redirect";
 		}
 		
-		articleService.modify(param);
+		articleService.doModify(param);
 		
 		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
 		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));

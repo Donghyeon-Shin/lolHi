@@ -36,7 +36,7 @@
 		WHERE id = #{id}
 	</delete>
 
-	<insert id="write"  parameterType="map" useGeneratedKeys="true" keyProperty="id">
+	<insert id="doWrite"  parameterType="map" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article
 		<set>
 			regDate = NOW(),
@@ -55,7 +55,7 @@
 		</set>
 	</insert>
 
-	<update id="modify" parameterType="map">
+	<update id="doModify" parameterType="map">
 		UPDATE article
 		
 		<set>

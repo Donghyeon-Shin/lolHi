@@ -35,8 +35,14 @@ public class MemberService {
 	}
 
 	public Member getMemberById(int id) {
-		// TODO Auto-generated method stub
+
 		return memberDao.getMemberById(id);
+	}
+
+	public void doModify(Map<String, Object> param) {
+		
+		memberDao.doModify(param);
+		
 	}
 
 }

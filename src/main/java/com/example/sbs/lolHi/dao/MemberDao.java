@@ -18,4 +18,6 @@ public interface MemberDao {
 
 	Member getMemberById(int id);
 
+	void doModify(Map<String, Object> param);
+
 }
