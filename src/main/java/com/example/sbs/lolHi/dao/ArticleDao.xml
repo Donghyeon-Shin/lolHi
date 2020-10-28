@@ -29,9 +29,12 @@
 	</select>
 	
 	<select id="getForPrintArticleById" resultMap="article" >
-		SELECT *
-		FROM article
-		WHERE id = #{id}
+		SELECT A.*,
+		M.name AS extra__writer
+		FROM article AS A
+		INNER JOIN member AS M
+		ON A.memberId = M.id
+		WHERE A.id = #{id}
 	</select>
 	
 	<delete id="doDeleteArticleById" parameterType="int" >

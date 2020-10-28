@@ -103,7 +103,7 @@ public class ArticleController {
 	@RequestMapping("usr/article/doDelete")
 	public String showDoDelete( HttpServletRequest req, @RequestParam("id") int id, Model model) {
 		
-		int loginedMemberId = (int) req.getAttribute("isLogined");
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
 		Article article = articleService.getForPrintArticleById(id);
 		

@@ -11,6 +11,7 @@
 		<li>생성날짜 : ${article.regDate}</li>
 		<li>갱신날짜 : ${article.updateDate}</li>
 		<li>제목 : ${article.title}</li>
+		<li>작성자 : ${article.extra.writer}</li>
 		<li>내용 : ${article.body}</li>
 	</ul>
 	

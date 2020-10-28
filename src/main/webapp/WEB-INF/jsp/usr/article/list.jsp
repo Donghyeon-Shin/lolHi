@@ -52,14 +52,15 @@
 			<br />
 			작성자 : ${article.extra.writer}
 			<br />
-			생성날짜 : ${article.regDate }
-			<br />
-			갱신날짜 : ${article.updateDate }
-			<br />
 			제목 : ${article.title }
 			<br />
 			내용 : ${article.body }
 			<br />
+			생성날짜 : ${article.regDate }
+			<br />
+			갱신날짜 : ${article.updateDate }
+			<br />
+			
 			
 			<c:if test="${article.memberId == loginedMemberId}">
 				<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false" href="doDelete?id=${article.id}">삭제</a>
