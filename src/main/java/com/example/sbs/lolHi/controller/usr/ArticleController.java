@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sbs.lolHi.dto.Article;
+import com.example.sbs.lolHi.dto.ArticleReply;
 import com.example.sbs.lolHi.service.ArticleService;
 import com.example.sbs.lolHi.util.Util;
 
@@ -95,7 +96,10 @@ public class ArticleController {
 		
 		Article article = articleService.getForPrintArticleById(id);
 		
+		List<ArticleReply> articleReplys = articleService.getForPrintArticleReplysById(id);
+		
 		model.addAttribute("article", article);
+		model.addAttribute("articleReplys", articleReplys);
 		
 		return "usr/article/detail";
 	}
@@ -184,6 +188,25 @@ public class ArticleController {
 		
 		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
 		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
+		return "common/redirect";
+	}
+	
+	@RequestMapping("usr/article/doWriteReply")
+	public String showDoWriteReply(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param ) {
+		
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
+		param.put("loginedMemberId", loginedMemberId);
+		
+		int articleId = Util.getAsInt(param.get("articleId"));
+		
+		articleService.doWriteReply(param);
+		
+		int id = Util.getAsInt(param.get("id"));
+		
+		model.addAttribute("msg", String.format("%d번 댓글이 작성되었습니다.", id));
+		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", articleId));
+		
 		return "common/redirect";
 	}
 }

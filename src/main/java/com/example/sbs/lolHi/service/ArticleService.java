@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.sbs.lolHi.dao.ArticleDao;
 import com.example.sbs.lolHi.dto.Article;
+import com.example.sbs.lolHi.dto.ArticleReply;
 import com.example.sbs.lolHi.util.Util;
 
 @Service
@@ -61,6 +62,14 @@ public class ArticleService {
 	public int getTotalCount() {
 		
 		return articleDao.getTotalCount();
+	}
+
+	public void doWriteReply(Map<String, Object> param) {
+		articleDao.doWriteReply(param);
+	}
+
+	public  List<ArticleReply> getForPrintArticleReplysById(int id) {
+		return articleDao.getForPrintArticleReplysById(id);
 	}
 
 
