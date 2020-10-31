@@ -110,6 +110,17 @@
 		ORDER BY AR.id DESC
 	</select>
 	
+	<select id="getArticleReplyById" resultType="articleReply" parameterType="int">
+		 SELECT *
+		 FROM articleReply
+		 WHERE id = #{id};
+	</select>
+	
+	<delete id="doDeleteReply" parameterType="int">
+		DELETE FROM articleReply
+		WHERE id = #{id} 
+	</delete>
+	
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />

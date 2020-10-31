@@ -28,5 +28,10 @@ public interface ArticleDao {
 	void doWriteReply(Map<String, Object> param);
 
 	List<ArticleReply> getForPrintArticleReplysById(int id);
+	
+	ArticleReply getArticleReplyById(int id);
+
+	void doDeleteReply(int id);
+
 
 }

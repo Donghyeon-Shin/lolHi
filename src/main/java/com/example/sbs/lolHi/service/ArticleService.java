@@ -71,6 +71,19 @@ public class ArticleService {
 	public  List<ArticleReply> getForPrintArticleReplysById(int id) {
 		return articleDao.getForPrintArticleReplysById(id);
 	}
+	
+
+	public ArticleReply getArticleReplyById(int id) {
+		// TODO Auto-generated method stub
+		return articleDao.getArticleReplyById(id);
+	}
+
+	public void doDeleteReply(int id) {
+		articleDao.doDeleteReply(id);
+	}
+
+
+
 
 
 }

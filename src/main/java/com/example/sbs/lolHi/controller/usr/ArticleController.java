@@ -99,7 +99,14 @@ public class ArticleController {
 		List<ArticleReply> articleReplys = articleService.getForPrintArticleReplysById(id);
 		
 		model.addAttribute("article", article);
-		model.addAttribute("articleReplys", articleReplys);
+		
+		if ( articleReplys.size() == 0 ) {
+			model.addAttribute("replyExists", false);
+		} else {
+			model.addAttribute("replyExists", true);
+			model.addAttribute("articleReplys", articleReplys);
+		}
+
 		
 		return "usr/article/detail";
 	}
@@ -209,4 +216,18 @@ public class ArticleController {
 		
 		return "common/redirect";
 	}
+	
+	@RequestMapping("usr/article/doDeleteReply")
+	public String showDoDeleteReply(HttpServletRequest req, Model model, int id) {
+		
+		ArticleReply articleReply = articleService.getArticleReplyById(id); 
+			
+		articleService.doDeleteReply(id);
+		
+		model.addAttribute("msg", "댓글이 삭제되었습니다.");
+		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", articleReply.getArticleId()));
+		
+		return "common/redirect";
+	}
+	
 }
