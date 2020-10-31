@@ -62,7 +62,7 @@
 			<br />
 			
 			
-			<c:if test="${article.memberId == loginedMemberId}">
+			<c:if test="${article.memberId == loginedMemberId }">
 				<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false" href="doDelete?id=${article.id}">삭제</a>
 			</c:if>
 		</div>
@@ -80,12 +80,12 @@
 	<c:set var = "goLastBtnNeedToShow" value = "true"/>
 	
 	<c:if test = "${goFirstBtnNeedToShow}">
-		<a href="?page=1">◀◀</a>	
+		<a href="?page=1&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">◀◀</a>	
 	</c:if>
 	
 	<c:forEach var = "i" begin = "${pageMenuStart}" end = "${pageMenuEnd }">
 		<c:set var = "className" value = "${i == page ? 'selected' : ''}"/>
-		<a class = "className" href="?page=${i}">${i}</a>
+		<a class = "className" href="?page=${i}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">${i}</a>
 		
 		<c:if test = "${ i == totalPage }">
 			<c:set var = "goLastBtnNeedToShow" value = "false"/>
@@ -93,7 +93,7 @@
 	</c:forEach>
 	
 	<c:if test = "${goLastBtnNeedToShow}">
-		<a href="?page=${totalPage }">▶▶</a>	
+		<a href="?page=${totalPage}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">▶▶</a>	
 	</c:if>
 	
 	<%@ include file="../../part/foot.jspf"%> 

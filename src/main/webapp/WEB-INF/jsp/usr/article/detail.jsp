@@ -40,14 +40,16 @@
 					<td>${articleReply.extra.writer}</td>
 					<td>${articleReply.regDate}</td>
 					<td>${articleReply.body}</td>
-					<td>삭제하기</td>
+					<c:if test="${articleReply.memberId == loginedMemberId || article.memberId == loginedMemberId}">
+						<td><a href="doDeleteReply?id=${articleReply.id}">삭제하기</a></td> 
+					</c:if>
 				</tr>
 			</c:forEach>
 		
 		</tbody>
 		
 	</table>
-	
+					
 	
 	
 	<a href="list">돌아가기</a>
