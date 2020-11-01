@@ -29,14 +29,6 @@ public class ArticleController {
 	@RequestMapping("usr/article/list")
 	public String showList( HttpSession session, Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType ) {
 		
-		int loginedMemberId = 0;
-		
-		if ( session.getAttribute("loginedMemberId") != null ) {
-			loginedMemberId = (int)session.getAttribute("loginedMemberId");
-			model.addAttribute("loginedMemberId", loginedMemberId);
-		} 
-
-
 		List<Article> articles = articleService.getForPrintArticlesById(param);
 
 		int totalCount = (int)articleService.getTotalCount();
@@ -88,14 +80,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/detail")
-	public String showDetail( HttpSession session, Model model, @RequestParam("id") int id) {
-
-		int loginedMemberId = 0;
-		
-		if ( session.getAttribute("loginedMemberId") != null ) {
-			loginedMemberId = (int)session.getAttribute("loginedMemberId");
-			model.addAttribute("loginedMemberId", loginedMemberId);
-		} 
+	public String showDetail( HttpSession session, Model model, int id, String listUrl) {
 		
 		Article article = articleService.getForPrintArticleById(id);
 		
@@ -107,10 +92,15 @@ public class ArticleController {
 			replyExists = true;
 		}
 		
+		if ( listUrl == null ) {
+			listUrl = "list";
+		}
+			
 		model.addAttribute("article", article);
 		model.addAttribute("articleReplies", replies);
 		model.addAttribute("replyExists", replyExists);
-	
+		model.addAttribute("listUrl", listUrl);
+		
 		return "usr/article/detail";
 	}
 

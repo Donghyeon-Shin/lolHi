@@ -15,6 +15,15 @@
 	<li>내용 : ${article.body}</li>
 </ul>
 
+<a href="${listUrl}">돌아가기</a>
+
+<c:if test="${ article.memberId == loginedMemberId }">
+	<a href="modify?id=${article.id}">게시글 수정</a>
+</c:if>
+<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
+	href="doDelete?id=${article.id}">게시글 삭제</a>
+
+
 <form action="../reply/doWrite" method="POST">
 
 	<input type="hidden" name="relTypeCode" value="article" /> <input
@@ -44,10 +53,11 @@
 					<td>${articleReply.regDate}</td>
 					<td>${articleReply.body}</td>
 					<c:if test="${articleReply.memberId == loginedMemberId}">
-						<td><a
-							onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
-							href="../reply/doDelete?id=${articleReply.id}">삭제하기</a> <a
-							href="../reply/modify?id=${articleReply.id}">수정하기</a></td>
+						<td>
+							<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
+								href="../reply/doDelete?id=${articleReply.id}">삭제하기</a>
+							<a href="../reply/modify?id=${articleReply.id}">수정하기</a>
+						</td>
 					</c:if>
 				</tr>
 			</c:forEach>
@@ -57,13 +67,5 @@
 	</table>
 
 </c:if>
-
-<a href="list">돌아가기</a>
-
-<c:if test="${ article.memberId == loginedMemberId }">
-	<a href="modify?id=${article.id}">게시글 수정</a>
-</c:if>
-<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
-	href="doDelete?id=${article.id}">게시글 삭제</a>
 
 <%@ include file="../../part/foot.jspf"%>

@@ -47,8 +47,10 @@
 	
 	
 	<c:forEach items="${articles}" var = "article">
+		<c:set var = "detailUrl" value= "/usr/article/detail?id=${article.id}&listUrl=${encodedCurrentUri}"/>
+	
 		<div>
-			<a href="detail?id=${article.id }">번호 : ${article.id }</a>
+			<a href="${detailUrl}">번호 : ${article.id }</a>
 			<br />
 			작성자 : ${article.extra.writer}
 			<br />
