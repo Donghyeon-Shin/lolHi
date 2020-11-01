@@ -32,4 +32,8 @@ public class ReplyService {
 		replyDao.doDelete(id);
 	}
 
+	public void doModify(Map<String, Object> param) {
+		replyDao.doModify(param);
+	}
+
 }

@@ -49,6 +49,17 @@
 		WHERE id = #{id}
 	</delete>
 	
+	<update id="doModify" parameterType="map">
+		UPDATE reply
+		<set>
+			updateDate= NOW(),
+			<if test="body!= null">
+				body = #{body},
+			</if>
+		</set> 
+		WHERE id = #{id}
+	</update>
+	
 	<resultMap type="Reply" id="reply">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />

@@ -65,13 +65,72 @@ public class ReplyController {
 		String relTypeCode = reply.getRelTypeCode();
 		int relId = reply.getRelId();
 		
-		
-		
-		
-		
 		replyService.doDelete(id);
 		
 		model.addAttribute("msg", String.format("%d번 댓글이 삭제되었습니다.", id));
+		model.addAttribute("replaceUri", String.format("/usr/%s/detail?id=%d", relTypeCode, relId));
+		return "common/redirect";
+	}
+	
+	@RequestMapping("usr/reply/modify")
+	public String showModify(HttpServletRequest req,  Model model, int id) { 
+		
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		
+		Reply reply  = replyService.getReplyById(id);
+		
+		if ( reply == null ) {
+			
+			model.addAttribute("msg", "존재하지 않는 댓글입니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+			
+		}
+		
+		if ( loginedMemberId != reply.getMemberId() ) {
+
+			model.addAttribute("msg", "권한이 없습니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		model.addAttribute("reply", reply);
+		
+		return "usr/reply/modify";
+	}
+	
+	@RequestMapping("usr/reply/doModify")
+	public String showModify(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param) { 
+		
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		
+		int id = Util.getAsInt( param.get("id"));
+		
+		Reply reply  = replyService.getReplyById(id);
+		
+		if ( reply == null ) {
+			
+			model.addAttribute("msg", "존재하지 않는 댓글입니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+			
+		}
+		
+		if ( loginedMemberId != reply.getMemberId() ) {
+
+			model.addAttribute("msg", "권한이 없습니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		String relTypeCode = (String) reply.getRelTypeCode();
+		int relId = (int)reply.getRelId();
+		
+		System.out.println(param.get("body"));
+		
+		replyService.doModify(param);
+		
+		model.addAttribute("msg", String.format("%d번 댓글이 수정되었습니다.", id));
 		model.addAttribute("replaceUri", String.format("/usr/%s/detail?id=%d", relTypeCode, relId));
 		return "common/redirect";
 	}

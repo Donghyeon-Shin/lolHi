@@ -19,8 +19,11 @@ public class Util {
 			return ((int) object);
 
 		} else if (object instanceof String) {
-
-			return Integer.parseInt((String) object);
+			try {
+				return Integer.parseInt((String) object);				
+			} catch (NumberFormatException e ) {
+				return defaultValue;
+			}
 		}
 
 		return defaultValue;

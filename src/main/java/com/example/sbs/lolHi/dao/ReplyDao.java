@@ -18,5 +18,7 @@ public interface ReplyDao {
 	Reply getReplyById( @Param("id") int id);
 
 	void doDelete( @Param("id") int id);
+
+	void doModify( Map<String, Object> param);
 	
 }
