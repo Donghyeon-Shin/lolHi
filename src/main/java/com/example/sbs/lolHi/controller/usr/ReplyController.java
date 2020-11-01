@@ -41,7 +41,7 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("usr/reply/doDelete")
-	public String showDoDelete(HttpServletRequest req,  Model model, int id) {
+	public String showDoDelete(HttpServletRequest req,  Model model, int id, String redirectUrl) {
 		
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 			
@@ -65,10 +65,16 @@ public class ReplyController {
 		String relTypeCode = reply.getRelTypeCode();
 		int relId = reply.getRelId();
 		
+		if ( redirectUrl == null || redirectUrl.length() == 0) {
+			redirectUrl = String.format("/usr/%s/detail?id=%d", relTypeCode, relId);
+		}
+		
+		
 		replyService.doDelete(id);
+
 		
 		model.addAttribute("msg", String.format("%d번 댓글이 삭제되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/%s/detail?id=%d", relTypeCode, relId));
+		model.addAttribute("replaceUri", redirectUrl);
 		return "common/redirect";
 	}
 	
