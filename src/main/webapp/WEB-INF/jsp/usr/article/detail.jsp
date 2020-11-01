@@ -26,6 +26,8 @@
 
 <form action="../reply/doWrite" method="POST">
 
+	
+	<input type="hidden" name="redirectUrl" value="${currentUri}" />
 	<input type="hidden" name="relTypeCode" value="article" /> <input
 		type="hidden" name="relId" value="${article.id}" />
 
