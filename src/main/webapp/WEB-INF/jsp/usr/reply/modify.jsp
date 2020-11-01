@@ -34,6 +34,7 @@
 <form action="./doModify" method="POST" onsubmit="modifyFormSubmit(this); return false;" >
 
 
+	<input type="hidden" name="redirectUrl" value="${redirectUrl}" />
 	<input type="hidden" name="id" value="${reply.id}" />
 
 	<div>번호 : ${reply.id}</div>

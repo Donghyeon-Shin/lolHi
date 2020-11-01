@@ -84,7 +84,7 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("usr/reply/modify")
-	public String showModify(HttpServletRequest req,  Model model, int id) { 
+	public String showModify(HttpServletRequest req,  Model model, int id, String redirectUrl) { 
 		
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
@@ -106,12 +106,13 @@ public class ReplyController {
 		}
 		
 		model.addAttribute("reply", reply);
+		model.addAttribute("redirectUrl", redirectUrl);
 		
 		return "usr/reply/modify";
 	}
 	
 	@RequestMapping("usr/reply/doModify")
-	public String showModify(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param) { 
+	public String showModify(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param, String redirectUrl ) { 
 		
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
@@ -141,8 +142,12 @@ public class ReplyController {
 		
 		replyService.doModify(param);
 		
+		if ( redirectUrl == null || redirectUrl.length() == 0 ) {
+			redirectUrl = String.format("/usr/%s/detail?id=%d", relTypeCode, relId);
+		}
+		
 		model.addAttribute("msg", String.format("%d번 댓글이 수정되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/%s/detail?id=%d", relTypeCode, relId));
+		model.addAttribute("replaceUri", redirectUrl);
 		return "common/redirect";
 	}
 }
