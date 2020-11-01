@@ -84,43 +84,6 @@
 		FROM article
 	</select>
 	
-	<insert id="doWriteReply"  parameterType="map" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO articleReply
-		<set>
-			regDate = NOW(),
-			<if test="body != null">
-				body = #{body},
-			</if>
-			<if test="articleId != null">
-				articleId = #{articleId},
-			</if>
-			<if test="loginedMemberId != null">
-				memberId = #{loginedMemberId},
-			</if>
-		</set>
-	</insert>
-	
-	<select id="getForPrintArticleReplysById" resultMap="articleReply" parameterType="int">
-		SELECT AR.*,
-		M.name AS extra__writer
-		FROM articleReply AS AR 
-		INNER JOIN `member` AS M
-		ON AR.memberId = M.id
-		WHERE AR.articleId = #{id}
-		ORDER BY AR.id DESC
-	</select>
-	
-	<select id="getArticleReplyById" resultType="articleReply" parameterType="int">
-		 SELECT *
-		 FROM articleReply
-		 WHERE id = #{id};
-	</select>
-	
-	<delete id="doDeleteReply" parameterType="int">
-		DELETE FROM articleReply
-		WHERE id = #{id} 
-	</delete>
-	
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />
@@ -137,14 +100,4 @@
 		
 	</resultMap>
 	
-		<resultMap type="ArticleReply" id="articleReply">
-		<id property="id" column="id" />
-		<id property="regDate" column="regDate" />
-		<id property="body" column="body" />
-		<id property="memberId" column="memberId" />
-		<id property="articleId" column="articleId" />
-		<association property="extra" javaType="map">
-			<id property="writer" column="extra__writer" />
-		</association>
-	</resultMap>
 </mapper>

@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sbs.lolHi.dto.Article;
-import com.example.sbs.lolHi.dto.ArticleReply;
+import com.example.sbs.lolHi.dto.Reply;
 import com.example.sbs.lolHi.service.ArticleService;
+import com.example.sbs.lolHi.service.ReplyService;
 import com.example.sbs.lolHi.util.Util;
 
 @Controller
@@ -22,6 +23,8 @@ public class ArticleController {
 	
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping("usr/article/list")
 	public String showList( HttpSession session, Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType ) {
@@ -96,18 +99,18 @@ public class ArticleController {
 		
 		Article article = articleService.getForPrintArticleById(id);
 		
-		List<ArticleReply> articleReplys = articleService.getForPrintArticleReplysById(id);
+		List<Reply> replies = replyService.getForPrintRepliesById("article", id);
+		
+		boolean replyExists = false;
+		
+		if ( replies.size() != 0 ) {
+			replyExists = true;
+		}
 		
 		model.addAttribute("article", article);
-		
-		if ( articleReplys.size() == 0 ) {
-			model.addAttribute("replyExists", false);
-		} else {
-			model.addAttribute("replyExists", true);
-			model.addAttribute("articleReplys", articleReplys);
-		}
-
-		
+		model.addAttribute("articleReplies", replies);
+		model.addAttribute("replyExists", replyExists);
+	
 		return "usr/article/detail";
 	}
 
@@ -195,38 +198,6 @@ public class ArticleController {
 		
 		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
 		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
-		return "common/redirect";
-	}
-	
-	@RequestMapping("usr/article/doWriteReply")
-	public String showDoWriteReply(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param ) {
-		
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
-		
-		param.put("loginedMemberId", loginedMemberId);
-		
-		int articleId = Util.getAsInt(param.get("articleId"));
-		
-		articleService.doWriteReply(param);
-		
-		int id = Util.getAsInt(param.get("id"));
-		
-		model.addAttribute("msg", String.format("%d번 댓글이 작성되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", articleId));
-		
-		return "common/redirect";
-	}
-	
-	@RequestMapping("usr/article/doDeleteReply")
-	public String showDoDeleteReply(HttpServletRequest req, Model model, int id) {
-		
-		ArticleReply articleReply = articleService.getArticleReplyById(id); 
-			
-		articleService.doDeleteReply(id);
-		
-		model.addAttribute("msg", "댓글이 삭제되었습니다.");
-		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", articleReply.getArticleId()));
-		
 		return "common/redirect";
 	}
 	

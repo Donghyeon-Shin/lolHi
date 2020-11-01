@@ -15,9 +15,10 @@
 	<li>내용 : ${article.body}</li>
 </ul>
 
-<form action="doWriteReply" method="POST">
+<form action="../reply/doWrite" method="POST">
 
-	<input type="hidden" name="articleId" value="${article.id}" />
+	<input type="hidden" name="relTypeCode" value="article" />
+	<input type="hidden" name="relId" value="${article.id}" />
 
 	<textarea name="body" placeholder="댓글을 적어주세요."></textarea>
 	<button type="submit">작성</button>
@@ -37,14 +38,16 @@
 
 
 		<tbody>
-			<c:forEach items="${articleReplys}" var="articleReply">
+			<c:forEach items="${articleReplies}" var="articleReply">
 				<tr>
 					<td>${articleReply.extra.writer}</td>
 					<td>${articleReply.regDate}</td>
 					<td>${articleReply.body}</td>
 					<c:if
-						test="${articleReply.memberId == loginedMemberId || article.memberId == loginedMemberId}">
-						<td><a href="doDeleteReply?id=${articleReply.id}">삭제하기</a></td>
+						test="${articleReply.memberId == loginedMemberId}">
+						<td><a
+							onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
+							href="../reply/doDelete?id=${articleReply.id}">삭제하기</a></td>
 					</c:if>
 				</tr>
 			</c:forEach>
