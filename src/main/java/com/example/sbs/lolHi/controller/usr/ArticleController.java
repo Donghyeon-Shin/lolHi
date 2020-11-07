@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,9 +92,11 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/detail")
-	public String showDetail( HttpSession session, Model model, int id, String listUrl) {
+	public String showDetail( HttpServletRequest req, Model model, int id, String listUrl) {
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
 		List<Reply> replies = replyService.getForPrintRepliesById("article", id);
 		
@@ -120,11 +121,11 @@ public class ArticleController {
 	@RequestMapping("usr/article/doDelete")
 	public String showDoDelete( HttpServletRequest req, @RequestParam("id") int id, Model model) {
 		
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		if ( article.getMemberId() != loginedMemberId ) {
+		if ( (boolean)article.getExtra().get("actorCanModify") == false ) {
 			
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);
@@ -182,12 +183,11 @@ public class ArticleController {
 	@RequestMapping("usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, @RequestParam("id") int id) {
 		
-		int loginedMemberId =  (int)req.getAttribute("loginedMemberId");;
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		
-		if ( article.getMemberId() != loginedMemberId ) {
+		if ( (boolean)article.getExtra().get("actorCanModify") == false ) {
 			
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);
@@ -202,13 +202,13 @@ public class ArticleController {
 	@RequestMapping("usr/article/doModify")
 	public String showDoModify(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param ) {
 		
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");;
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
 		int id = Util.getAsInt(param.get("id"));
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		if ( article.getMemberId() != loginedMemberId ) {
+		if ( (boolean)article.getExtra().get("actorCanModify") == false ) {
 			
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);

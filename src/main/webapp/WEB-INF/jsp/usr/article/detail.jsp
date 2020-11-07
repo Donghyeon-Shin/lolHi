@@ -17,18 +17,21 @@
 
 <a href="${listUrl}">돌아가기</a>
 
-<c:if test="${ article.memberId == loginedMemberId }">
+<c:if test="${ article.extra.actorCanDelete }">
 	<a href="modify?id=${article.id}">게시글 수정</a>
 </c:if>
-<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
-	href="doDelete?id=${article.id}">게시글 삭제</a>
+<c:if test="${  article.extra.actorCanModify }">
+	<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
+		href="doDelete?id=${article.id}">게시글 삭제</a>
+</c:if>
+
 
 
 <form action="../reply/doWrite" method="POST">
 
-	
-	<input type="hidden" name="redirectUrl" value="${currentUri}" />
-	<input type="hidden" name="relTypeCode" value="article" /> <input
+
+	<input type="hidden" name="redirectUrl" value="${currentUri}" /> <input
+		type="hidden" name="relTypeCode" value="article" /> <input
 		type="hidden" name="relId" value="${article.id}" />
 
 	<textarea name="body" placeholder="댓글을 적어주세요."></textarea>
@@ -58,7 +61,8 @@
 						<td>
 							<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
 								href="../reply/doDelete?id=${articleReply.id}&redirectUrl=${encodedCurrentUri}">삭제하기</a>
-							<a href="../reply/modify?id=${articleReply.id}&redirectUrl=${encodedCurrentUri}">수정하기</a>
+							<a
+								href="../reply/modify?id=${articleReply.id}&redirectUrl=${encodedCurrentUri}">수정하기</a>
 						</td>
 					</c:if>
 				</tr>
