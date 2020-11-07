@@ -31,7 +31,7 @@ public class ArticleController {
 		
 		List<Article> articles = articleService.getForPrintArticlesById(param);
 
-		int totalCount = (int)articleService.getTotalCount();
+		int totalCount = (int)articleService.getTotalCount(param);
 		int itemsCountInAPage = 10;
 		
 		int totalPage = (int)Math.ceil((double)totalCount / itemsCountInAPage);

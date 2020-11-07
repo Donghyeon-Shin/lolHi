@@ -82,6 +82,18 @@
 	<select id="getTotalCount" resultType="int" >
 		SELECT COUNT(*)
 		FROM article
+		<choose>
+			<when test="searchType == 'title'">
+				WHERE title LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'body'">
+				WHERE body LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'titleAndBody'">
+				WHERE title LIKE CONCAT('%',#{searchKeyword},'%') OR
+				body LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+		</choose>
 	</select>
 	
 	<resultMap type="Article" id="article">

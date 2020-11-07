@@ -22,6 +22,6 @@ public interface ArticleDao {
 
 	void doModify(Map<String, Object> param);
 
-	int getTotalCount();
+	int getTotalCount(Map<String, Object> param);
 
 }
