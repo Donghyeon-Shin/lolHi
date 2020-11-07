@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sbs.lolHi.dto.Article;
 import com.example.sbs.lolHi.dto.Board;
+import com.example.sbs.lolHi.dto.Member;
 import com.example.sbs.lolHi.dto.Reply;
 import com.example.sbs.lolHi.service.ArticleService;
 import com.example.sbs.lolHi.service.ReplyService;
@@ -28,7 +29,9 @@ public class ArticleController {
 	private ReplyService replyService;
 
 	@RequestMapping("usr/article/list")
-	public String showList( HttpSession session, Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType, String boardCode ) {
+	public String showList( HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType, String boardCode ) {
+		
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
 		if ( boardCode == null ) {
 			boardCode = "free";
@@ -38,7 +41,7 @@ public class ArticleController {
 		
 		Board board = articleService.getBoard(boardCode);
 		
-		List<Article> articles = articleService.getForPrintArticlesById(param);
+		List<Article> articles = articleService.getForPrintArticlesById(loginedMember, param);
 
 		int totalCount = (int)articleService.getTotalCount(param);
 		int itemsCountInAPage = 10;

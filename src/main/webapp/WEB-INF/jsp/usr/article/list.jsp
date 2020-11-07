@@ -64,7 +64,7 @@
 			<br />
 			
 			
-			<c:if test="${article.memberId == loginedMemberId }">
+			<c:if test="${ article.extra.actorCanDelete }">	
 				<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false" href="doDelete?id=${article.id}">삭제</a>
 			</c:if>
 		</div>

@@ -1,5 +1,6 @@
 package com.example.sbs.lolHi.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.sbs.lolHi.dao.ArticleDao;
 import com.example.sbs.lolHi.dto.Article;
 import com.example.sbs.lolHi.dto.Board;
+import com.example.sbs.lolHi.dto.Member;
 import com.example.sbs.lolHi.util.Util;
 
 @Service
@@ -19,7 +21,7 @@ public class ArticleService {
 	private ArticleDao articleDao;
 	
 
-	public List<Article> getForPrintArticlesById(Map<String, Object> param) {
+	public List<Article> getForPrintArticlesById(Member actorMember, Map<String, Object> param) {
 
 		int page = Util.getAsInt(param.get("page"), 1);
 
@@ -38,7 +40,21 @@ public class ArticleService {
 		param.put("limitFrom", limitFrom);
 		param.put("limitTake", limitTake);
 		
-		return articleDao.getForPrintArticlesById(param);
+		List<Article> articles = articleDao.getForPrintArticlesById(param);
+
+		for ( Article article : articles ) {
+			if ( article.getExtra() == null ) {
+				article.setExtra(new HashMap<>()); 
+			}
+
+			boolean actorCanDelete = actorMember.getId() == article.getMemberId();
+			boolean actorCanModify = actorCanDelete;
+
+			article.getExtra().put("actorCanDelete", actorCanDelete);
+			article.getExtra().put("actorCanModify", actorCanModify);
+		}
+		
+		return articles;
 	}
 
 	public Article getForPrintArticleById(int id) {
