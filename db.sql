@@ -10,6 +10,7 @@ USE lolHi;
 CREATE TABLE article(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     memberId INT(10) NOT NULL,
+    boardId INT(10) NOT NULL,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     title CHAR(200) NOT NULL,
@@ -21,6 +22,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
+boardId = 1,
 title = '제목1',
 `body` = '내용1';
 
@@ -28,6 +30,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
+boardId = 2,
 title = '제목2',
 `body` = '내용2';
 
@@ -35,6 +38,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
+boardId = 2,
 title = '제목3',
 `body` = '내용3';
 
@@ -42,6 +46,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
+boardId = 1,
 title = '제목4',
 `body` = '내용4';
 
@@ -62,6 +67,13 @@ updateDate = NOW(),
 loginId = 'sbs123',
 loginPw = 'sbs123414',
 `name` = 'admin'; 
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = '1234',
+loginPw = '1234',
+`name` = '숫자'; 
 
 # 댓글 테이블 생성
 CREATE TABLE reply(
