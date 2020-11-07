@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 사이트 - ${pageName }</title>
+<title>${pageName}</title>
 <link rel="stylesheet" href="/resource/common.css">
 </head>
 <body>
@@ -16,7 +16,9 @@
 		<div>${loginedMember.name}님 환영합니다.</div>
 		<a href="../member/doLogout">로그아웃</a>
 		<a href="../member/modify">회원정보 수정</a>
-		<a href="write">게시글 생성</a>
+		<c:if test="${board.code != NULL}">
+			<a href="write?boardCode=${board.code}">게시글 생성</a>
+		</c:if>
 	</c:if>
 	
 	<c:if test="${not isLogined}">

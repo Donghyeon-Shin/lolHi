@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageName" value="게시물 작성" />
+<c:set var="pageName" value="${board.name}-게시물 작성" />
 <%@ include file="../../part/head.jspf"%>
 
 <script>
@@ -45,6 +45,7 @@
 	onsubmit="writeFormSubmit(this); return false;">
 
 	<input type="hidden" name="memberId" value="${loginedMemberId}" />
+	<input type="hidden" name="boardCode" value="${board.code}" />
 
 	<table>
 		<tbody>
@@ -60,8 +61,8 @@
 
 			<tr>
 				<th>작성</th>
-				<td><button onclick="if ( confirm('수정하시겠습니까?') == false) return false;"
-					type="submit">수정</button></td>
+				<td><button onclick="if ( confirm('작성하시겠습니까?') == false) return false;"
+					type="submit">작성</button></td>
 			</tr>
 		</tbody>
 

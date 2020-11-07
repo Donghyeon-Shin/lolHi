@@ -61,6 +61,10 @@
 			<if test="memberId != null">
 				memberId = #{loginedMemberId},
 			</if>
+			
+			<if test="boardId != null">
+				boardId = #{boardId},
+			</if>
 		</set>
 	</insert>
 

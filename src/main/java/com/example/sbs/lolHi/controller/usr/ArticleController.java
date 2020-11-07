@@ -136,7 +136,19 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("usr/article/write")
-	public String showWrite(HttpServletRequest req, Model model) {
+	public String showWrite(HttpServletRequest req, Model model, String boardCode) {
+		
+		if ( boardCode == null ) {
+			
+			model.addAttribute("msg", "올바른 경로가 아닙니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+			
+		}
+		
+		Board board = articleService.getBoard(boardCode);
+		
+		model.addAttribute("board", board);
 		
 		return "usr/article/write";
 	}
@@ -148,13 +160,19 @@ public class ArticleController {
 	
 		param.put("loginedMemberId", loginedMemberId);
 		
+		Board board = articleService.getBoard((String)param.get("boardCode"));
+		
+		param.put("boardId", board.getId());
+		
+		System.out.println("boardId : " + param.get("boardId"));
+		
 		articleService.doWrite(param);
 		
 		int id = Util.getAsInt(param.get("id"));
 		
 		
 		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
+		model.addAttribute("replaceUri", String.format("/usr/article/list?boardCode=%s", board.getCode()));
 		return "common/redirect";
 	}
 	
