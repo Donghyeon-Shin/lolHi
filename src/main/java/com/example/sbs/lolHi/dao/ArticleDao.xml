@@ -8,8 +8,11 @@
 		SELECT A.*,
 		M.name AS extra__writer
 		FROM article AS A
-		INNER JOIN member AS M
+		LEFT JOIN member AS M
 		ON A.memberId = M.id
+		LEFT JOIN board AS B
+		ON A.boardId = B.id
+		WHERE B.code = #{boardCode}
 		<choose>
 			<when test="searchType == 'title'">
 				WHERE title LIKE CONCAT('%',#{searchKeyword},'%')
@@ -81,7 +84,10 @@
 	
 	<select id="getTotalCount" resultType="int" >
 		SELECT COUNT(*)
-		FROM article
+		FROM article AS A
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		WHERE B.code = #{boardCode}
 		<choose>
 			<when test="searchType == 'title'">
 				WHERE title LIKE CONCAT('%',#{searchKeyword},'%')
@@ -94,6 +100,12 @@
 				body LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 		</choose>
+	</select>
+	
+	<select id="getBoard" resultType="Board">
+		SELECT *
+		FROM board
+		WHERE code = #{boardCode}
 	</select>
 	
 	<resultMap type="Article" id="article">

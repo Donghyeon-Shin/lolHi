@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	<c:set var = "pageName" value = "게시물 리스트" />
+	<c:set var = "pageName" value = "${board.name} - 리스트" />
 	
 	<%@ include file="../../part/head.jspf"%>
 	
@@ -82,12 +82,12 @@
 	<c:set var = "goLastBtnNeedToShow" value = "true"/>
 	
 	<c:if test = "${goFirstBtnNeedToShow}">
-		<a href="?page=1&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">◀◀</a>	
+		<a href="?page=1&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">◀◀</a>	
 	</c:if>
 	
 	<c:forEach var = "i" begin = "${pageMenuStart}" end = "${pageMenuEnd }">
 		<c:set var = "className" value = "${i == page ? 'selected' : ''}"/>
-		<a class = "className" href="?page=${i}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">${i}</a>
+		<a class = "className" href="?page=${i}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">${i}</a>
 		
 		<c:if test = "${ i == totalPage }">
 			<c:set var = "goLastBtnNeedToShow" value = "false"/>
@@ -95,7 +95,7 @@
 	</c:forEach>
 	
 	<c:if test = "${goLastBtnNeedToShow}">
-		<a href="?page=${totalPage}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">▶▶</a>	
+		<a href="?page=${totalPage}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">▶▶</a>	
 	</c:if>
 	
 	<%@ include file="../../part/foot.jspf"%> 

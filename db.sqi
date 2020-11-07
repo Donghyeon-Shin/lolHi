@@ -27,9 +27,23 @@ title = '제목1',
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 1,
+memberId = 2,
 title = '제목2',
 `body` = '내용2';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = '제목3',
+`body` = '내용3';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+title = '제목4',
+`body` = '내용4';
 
 # member 테이블 생성
 CREATE TABLE `member`(
@@ -41,7 +55,7 @@ CREATE TABLE `member`(
     `name` CHAR(10) NOT NULL
 );
 
-# member 테이블 생성
+# member 데이터 생성
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -50,7 +64,6 @@ loginPw = 'sbs123414',
 `name` = 'admin'; 
 
 # 댓글 테이블 생성
-
 CREATE TABLE reply(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -61,9 +74,35 @@ CREATE TABLE reply(
     relTypeCode CHAR(50) NOT NULL # 관련 데이터 타입
 );
 
+# 댓글 데이터 생성
 INSERT INTO reply
 SET regDate = NOW(),
 memberId = 1,
 relId = 1,
 relTypeCode = 'article',
 `body` = '재밌네요';
+
+# board 테이블 생성
+CREATE TABLE board(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    `code` CHAR(50) NOT NULL
+);
+
+# code 인덱스 추가
+ALTER TABLE board ADD INDEX(`code`);
+
+# board 데이터 생성 
+INSERT INTO board
+SET regDate = NOW(),
+`name` = '공지사항',
+`code` = 'notice';
+
+INSERT INTO board
+SET regDate = NOW(),
+`name` = '자유게시판',
+`code` = 'free';
+
+SELECT *
+FROM board
