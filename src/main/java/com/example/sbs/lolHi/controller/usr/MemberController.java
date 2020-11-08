@@ -51,7 +51,7 @@ public class MemberController {
 		memberService.join(param);
 		
 		model.addAttribute("msg", String.format(" %s님 가입되었습니다.", loginId));
-		model.addAttribute("replaceUri", "/usr/article/list");
+		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
 
@@ -91,7 +91,7 @@ public class MemberController {
 		session.setAttribute("loginedMemberId", member.getId());
 
 		model.addAttribute("msg", String.format("%s님 환영합니다.", member.getName()));
-		model.addAttribute("replaceUri", "../article/list");
+		model.addAttribute("replaceUri", "../home/main");
 		return "common/redirect";
 
 	}

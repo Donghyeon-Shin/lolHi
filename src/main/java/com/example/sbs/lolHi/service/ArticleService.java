@@ -47,7 +47,11 @@ public class ArticleService {
 				article.setExtra(new HashMap<>()); 
 			}
 
-			boolean actorCanDelete = actorMember.getId() == article.getMemberId();
+			boolean actorCanDelete = false;
+			
+			if ( actorMember != null ) {
+				actorCanDelete = actorMember.getId() == article.getMemberId();
+			}
 			boolean actorCanModify = actorCanDelete;
 
 			article.getExtra().put("actorCanDelete", actorCanDelete);
@@ -65,7 +69,11 @@ public class ArticleService {
 			article.setExtra(new HashMap<>()); 
 		}
 
-		boolean actorCanDelete = actorMember.getId() == article.getMemberId();
+		boolean actorCanDelete = false;
+		
+		if ( actorMember != null ) {
+			actorCanDelete = actorMember.getId() == article.getMemberId();
+		}
 		boolean actorCanModify = actorCanDelete;
 
 		article.getExtra().put("actorCanDelete", actorCanDelete);
