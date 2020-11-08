@@ -14,7 +14,8 @@ CREATE TABLE article(
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     title CHAR(200) NOT NULL,
-    `body` TEXT NOT NULL
+    `body` TEXT NOT NULL,
+    hit INT(10) UNSIGNED DEFAULT 0 NOT NULL
 );
 
 # 게시물 데이터 생성
@@ -115,6 +116,3 @@ INSERT INTO board
 SET regDate = NOW(),
 `name` = '자유게시판',
 `code` = 'free';
-
-SELECT *
-FROM board

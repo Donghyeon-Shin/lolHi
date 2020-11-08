@@ -65,6 +65,10 @@ public class ArticleService {
 		
 		Article article = articleDao.getForPrintArticleById(id);
 		
+		if (article == null) {
+			return null;
+		}
+		
 		if ( article.getExtra() == null ) {
 			article.setExtra(new HashMap<>()); 
 		}

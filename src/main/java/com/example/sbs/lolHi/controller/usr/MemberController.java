@@ -102,7 +102,8 @@ public class MemberController {
 
 		session.removeAttribute("loginedMemberId");
 
-		model.addAttribute("replaceUri", "/usr/article/list");
+		model.addAttribute("msg", String.format(" 로그아웃 되었습니다." ));
+		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
 	
@@ -127,7 +128,7 @@ public class MemberController {
 		
 		
 		model.addAttribute("msg", String.format(" 수정되었습니다." ));
-		model.addAttribute("replaceUri", "/usr/article/list");
+		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
 }

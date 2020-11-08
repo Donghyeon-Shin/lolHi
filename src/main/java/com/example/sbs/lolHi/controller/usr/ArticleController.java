@@ -109,7 +109,7 @@ public class ArticleController {
 		
 		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		List<Reply> replies = replyService.getForPrintRepliesById("article", id);
+		List<Reply> replies = replyService.getForPrintRepliesById(loginedMember,"article", id);
 		
 		boolean replyExists = false;
 		

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.sbs.lolHi.dto.Member;
 import com.example.sbs.lolHi.dto.Reply;
 import com.example.sbs.lolHi.service.ReplyService;
 import com.example.sbs.lolHi.util.Util;
@@ -22,7 +23,7 @@ public class ReplyController {
 	@RequestMapping("usr/reply/doWrite")
 	public String showDoWrite(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param, String redirectUrl) {
 
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");;
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 	
 		param.put("memberId", loginedMemberId);
 		
@@ -48,9 +49,9 @@ public class ReplyController {
 	@RequestMapping("usr/reply/doDelete")
 	public String showDoDelete(HttpServletRequest req,  Model model, int id, String redirectUrl) {
 		
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 			
-		Reply reply  = replyService.getReplyById(id);
+		Reply reply = replyService.getForPrintReply(loginedMember, id);
 		
 		if ( reply == null ) {
 			
@@ -60,7 +61,7 @@ public class ReplyController {
 			
 		}
 		
-		if ( loginedMemberId != reply.getMemberId() ) {
+		if ((boolean) reply.getExtra().get("actorCanDelete") == false) {
 
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);
@@ -86,9 +87,9 @@ public class ReplyController {
 	@RequestMapping("usr/reply/modify")
 	public String showModify(HttpServletRequest req,  Model model, int id, String redirectUrl) { 
 		
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 		
-		Reply reply  = replyService.getReplyById(id);
+		Reply reply = replyService.getForPrintReply(loginedMember, id);
 		
 		if ( reply == null ) {
 			
@@ -98,7 +99,7 @@ public class ReplyController {
 			
 		}
 		
-		if ( loginedMemberId != reply.getMemberId() ) {
+		if ((boolean) reply.getExtra().get("actorCanModify") == false) {
 
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);
@@ -114,11 +115,11 @@ public class ReplyController {
 	@RequestMapping("usr/reply/doModify")
 	public String showModify(HttpServletRequest req,  Model model, @RequestParam Map<String, Object> param, String redirectUrl ) { 
 		
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 		
 		int id = Util.getAsInt( param.get("id"));
 		
-		Reply reply  = replyService.getReplyById(id);
+		Reply reply = replyService.getForPrintReply(loginedMember, id);
 		
 		if ( reply == null ) {
 			
@@ -128,7 +129,7 @@ public class ReplyController {
 			
 		}
 		
-		if ( loginedMemberId != reply.getMemberId() ) {
+		if ((boolean) reply.getExtra().get("actorCanModify") == false) {
 
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);

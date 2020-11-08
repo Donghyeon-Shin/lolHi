@@ -7,11 +7,11 @@
 <%@ include file="../../part/head.jspf"%>
 
 <div>
-	<a href="../article/list?boardCode=free">자유게시판으로 이동</a>
+	<a href="../article-free/list">자유게시판으로 이동</a>
 </div>
 
 <div>
-	<a href="../article/list?boardCode=notice">공지사항으로 이동</a>
+	<a href="../article-notice/list">공지사항으로 이동</a>
 </div>
 
 
