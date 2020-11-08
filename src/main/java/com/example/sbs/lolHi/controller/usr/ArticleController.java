@@ -31,6 +31,19 @@ public class ArticleController {
 	@RequestMapping("usr/article-{boardCode}/list")
 	public String showList( HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String searchKeyword, String searchType, @PathVariable("boardCode") String boardCode ) {
 		
+		if ( searchKeyword != null ) {
+			searchKeyword = searchKeyword.trim();
+		}
+		
+		if ( searchType != null ) {
+			searchType = searchType.trim();
+		}
+		
+		param.put("searchKeyword", searchKeyword);
+		
+		param.put("searchType", searchType);
+		
+		
 		Member loginedMember = (Member)req.getAttribute("loginedMember");
 	
 		param.put("boardCode", boardCode);
@@ -86,17 +99,6 @@ public class ArticleController {
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
 		
-		if ( searchKeyword != null ) {
-			searchKeyword = searchKeyword.trim();
-		}
-		
-		if ( searchType != null ) {
-			searchType = searchType.trim();
-		}
-		
-		param.put("searchKeyword", searchKeyword);
-		
-		param.put("searchType", searchType);
 		
 		return "usr/article/list";
 	}

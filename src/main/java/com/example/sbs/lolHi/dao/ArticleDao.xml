@@ -15,14 +15,14 @@
 		WHERE B.code = #{boardCode}
 		<choose>
 			<when test="searchType == 'title'">
-				WHERE title LIKE CONCAT('%',#{searchKeyword},'%')
+				AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 			<when test="searchType == 'body'">
-				WHERE body LIKE CONCAT('%',#{searchKeyword},'%')
+				AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 			<when test="searchType == 'titleAndBody'">
-				WHERE title LIKE CONCAT('%',#{searchKeyword},'%') OR
-				body LIKE CONCAT('%',#{searchKeyword},'%')
+				AND (A.title LIKE CONCAT('%',#{searchKeyword},'%') OR
+				A.body LIKE CONCAT('%',#{searchKeyword},'%'))
 			</when>
 		</choose>
 		ORDER BY A.id DESC
@@ -94,14 +94,14 @@
 		WHERE B.code = #{boardCode}
 		<choose>
 			<when test="searchType == 'title'">
-				WHERE title LIKE CONCAT('%',#{searchKeyword},'%')
+				AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 			<when test="searchType == 'body'">
-				WHERE body LIKE CONCAT('%',#{searchKeyword},'%')
+				AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 			<when test="searchType == 'titleAndBody'">
-				WHERE title LIKE CONCAT('%',#{searchKeyword},'%') OR
-				body LIKE CONCAT('%',#{searchKeyword},'%')
+				AND (A.title LIKE CONCAT('%',#{searchKeyword},'%') OR
+				A.body LIKE CONCAT('%',#{searchKeyword},'%'))
 			</when>
 		</choose>
 	</select>
