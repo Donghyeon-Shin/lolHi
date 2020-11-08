@@ -102,8 +102,11 @@ public class ArticleService {
 	}
 
 	public Board getBoard(String boardCode) {
-		// TODO Auto-generated method stub
 		return articleDao.getBoard(boardCode);
+	}
+
+	public void increseArticleHit(int id) {
+		articleDao.increseArticleHit(id);
 	}
 
 }

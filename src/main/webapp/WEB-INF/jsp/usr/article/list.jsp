@@ -7,12 +7,8 @@
 	<%@ include file="../../part/head.jspf"%>
 	
 	<div>
-		<c:if test="${IsNotfree}">
-			<a href="../article-free/list">자유게시판으로 이동</a>
-		</c:if>
-		<c:if test="${IsNotNotice}">
-			<a href="../article-notice/list">공지사항으로 이동</a>
-		</c:if>
+		<a href="../article-free/list">자유게시판으로 이동</a>
+		<a href="../article-notice/list">공지사항으로 이동</a>
 	</div>
 	
 	<div class="con margin-top-30">
@@ -70,6 +66,8 @@
 			생성날짜 : ${article.regDate }
 			<br />
 			갱신날짜 : ${article.updateDate }
+			<br />
+			조회수 : ${article.hit }
 			<br />
 			
 			

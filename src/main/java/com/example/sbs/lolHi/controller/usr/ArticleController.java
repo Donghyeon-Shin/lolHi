@@ -81,13 +81,8 @@ public class ArticleController {
 			pageMenuEnd = totalPage;
 		}
 		
-		boolean IsNotfree = (!boardCode.equals("free"));
-		boolean IsNotNotice = (!boardCode.equals("notice"));
-		
 		model.addAttribute("articles", articles);
 		model.addAttribute("board",board);
-		model.addAttribute("IsNotfree",IsNotfree);
-		model.addAttribute("IsNotNotice",IsNotNotice);
 		model.addAllAttributes(param);
 		
 		param.put("itemsCountInAPage", itemsCountInAPage);
@@ -109,6 +104,8 @@ public class ArticleController {
 		Board board = articleService.getBoard(boardCode);
 		
 		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		
+		articleService.increseArticleHit(id);
 		
 		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		

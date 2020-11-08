@@ -8,6 +8,7 @@
 
 <ul>
 	<li>번호 : ${article.id}</li>
+	<li>조회수 : ${article.hit}</li>
 	<li>생성날짜 : ${article.regDate}</li>
 	<li>갱신날짜 : ${article.updateDate}</li>
 	<li>제목 : ${article.title}</li>
