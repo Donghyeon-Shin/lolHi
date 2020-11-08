@@ -6,6 +6,15 @@
 	
 	<%@ include file="../../part/head.jspf"%>
 	
+	<div>
+		<c:if test="${IsNotfree}">
+			<a href="../article-free/list">자유게시판으로 이동</a>
+		</c:if>
+		<c:if test="${IsNotNotice}">
+			<a href="../article-notice/list">공지사항으로 이동</a>
+		</c:if>
+	</div>
+	
 	<div class="con margin-top-30">
 	<span>
 		<span>총 게시물 수 : </span>
@@ -47,7 +56,7 @@
 	
 	
 	<c:forEach items="${articles}" var = "article">
-		<c:set var = "detailUrl" value= "/usr/article/detail?id=${article.id}&listUrl=${encodedCurrentUri}"/>
+		<c:set var = "detailUrl" value= "/usr/article-${board.code}/detail?id=${article.id}&listUrl=${encodedCurrentUri}"/>
 	
 		<div>
 			<a href="${detailUrl}">번호 : ${article.id }</a>
