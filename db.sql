@@ -58,6 +58,7 @@ CREATE TABLE `member`(
     updateDate DATETIME NOT NULL,
     loginId CHAR(100) NOT NULL,
     loginPw CHAR(100) NOT NULL,
+    email CHAR(100) NOT NULL,
     `name` CHAR(10) NOT NULL
 );
 
@@ -67,6 +68,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'sbs123',
 loginPw = 'sbs123414',
+email = 'sbs123@gmail.com',
 `name` = 'admin'; 
 
 INSERT INTO `member`
@@ -74,6 +76,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = '1234',
 loginPw = '1234',
+email = '1234@gmail.com',
 `name` = '숫자'; 
 
 # 댓글 테이블 생성
@@ -116,3 +119,5 @@ INSERT INTO board
 SET regDate = NOW(),
 `name` = '자유게시판',
 `code` = 'free';
+
+SELECT * FROM `member`;
