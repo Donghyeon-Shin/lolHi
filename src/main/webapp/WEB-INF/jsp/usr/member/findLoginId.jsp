@@ -39,7 +39,7 @@
 			}
 	</script>
 
-	<form action="./doFindFindLoginId" method="POST" onsubmit="findLoginIdSubmit(this); return false;">
+	<form action="./doFindLoginId" method="POST" onsubmit="findLoginIdSubmit(this); return false;">
 
 
 		<div>

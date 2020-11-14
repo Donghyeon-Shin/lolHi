@@ -143,14 +143,14 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("usr/member/findFindLoginId")
-	public String showFindFindLoginId() {
+	@RequestMapping("usr/member/findLoginId")
+	public String showFindLoginId() {
 		
-		return "usr/member/findFindLoginId";
+		return "usr/member/findLoginId";
 	}
 	
-	@RequestMapping("usr/member/doFindFindLoginId")
-	public String showDoFindFindLoginId(Model model, @RequestParam Map<String, Object> param) {
+	@RequestMapping("usr/member/doFindLoginId")
+	public String showDoFindLoginId(Model model, @RequestParam Map<String, Object> param) {
 		
 		String name = Util.getAsStr(param.get("name"), "");
 		String email = Util.getAsStr(param.get("email"), "");
@@ -159,11 +159,11 @@ public class MemberController {
 		
 		if ( member == null ) {
 			model.addAttribute("msg", String.format("정보와 일치하는 회원이 존재하지 않습니다." ));
-			model.addAttribute("replaceUri", "/usr/member/login");
+			model.addAttribute("historyBack", true);
 			return "common/redirect";
 		}
 		
-		model.addAttribute("msg", String.format("로그인 아이디는 %s 입니다.", member.getLoginId()));
+		model.addAttribute("msg", String.format(" 로그인 아이디 : %s, 가입날짜 : %s",member.getLoginId(), member.getRegDate()));
 		model.addAttribute("replaceUri", "/usr/member/login");
 		return "common/redirect";
 	}
