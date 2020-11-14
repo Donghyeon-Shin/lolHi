@@ -25,7 +25,7 @@ public class MemberController {
 	public String showJoin() {
 		return "usr/member/join";
 	}
-
+	
 	@RequestMapping("usr/member/doJoin")
 	public String showDoJoin(@RequestParam Map<String, Object> param, Model model) {
 
