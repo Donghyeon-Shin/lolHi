@@ -31,7 +31,7 @@ public class MemberController {
 
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 		String name = Util.getAsStr(param.get("name"), "");
-		String loginEmail = Util.getAsStr(param.get("loginEmail"), "");
+		String email = Util.getAsStr(param.get("email"), "");
 
 		if (loginId.length() == 0) {
 
@@ -42,8 +42,7 @@ public class MemberController {
 		}
 	
 		boolean isJoinAvailableLoginId = memberService.isJoinAvailableLoginId(loginId);
-		boolean isJoinAvailableName = memberService.isJoinAvailableName(name);
-		boolean isJoinAvailableEmail = memberService.isJoinAvailableEmail(loginEmail);
+		boolean isJoinAvailableNameAndEmail = memberService.isJoinAvailableName(name, email);
 
 		if (isJoinAvailableLoginId == false) {
 
@@ -53,22 +52,13 @@ public class MemberController {
 
 		}
 		
-		if (isJoinAvailableName == false) {
+		if (isJoinAvailableNameAndEmail == false) {
 
-			model.addAttribute("msg", String.format(" %s(은)는 이미 사용중인 닉네임 입니다.", name));
+			model.addAttribute("msg", String.format(" 이미 존재하는 회원의 정보입니다."));
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
 
 		}
-		
-		if (isJoinAvailableEmail == false) {
-
-			model.addAttribute("msg", String.format(" %s(은)는 이미 사용중인 이메일 입니다.", loginEmail));
-			model.addAttribute("historyBack", true);
-			return "common/redirect";
-
-		}
-
 		memberService.join(param);
 		
 		model.addAttribute("msg", String.format(" %s님 가입되었습니다.", name));
@@ -150,6 +140,31 @@ public class MemberController {
 		
 		model.addAttribute("msg", String.format(" 수정되었습니다." ));
 		model.addAttribute("replaceUri", "/usr/home/main");
+		return "common/redirect";
+	}
+	
+	@RequestMapping("usr/member/findFindLoginId")
+	public String showFindFindLoginId() {
+		
+		return "usr/member/findFindLoginId";
+	}
+	
+	@RequestMapping("usr/member/doFindFindLoginId")
+	public String showDoFindFindLoginId(Model model, @RequestParam Map<String, Object> param) {
+		
+		String name = Util.getAsStr(param.get("name"), "");
+		String email = Util.getAsStr(param.get("email"), "");
+		
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+		
+		if ( member == null ) {
+			model.addAttribute("msg", String.format("정보와 일치하는 회원이 존재하지 않습니다." ));
+			model.addAttribute("replaceUri", "/usr/member/login");
+			return "common/redirect";
+		}
+		
+		model.addAttribute("msg", String.format("로그인 아이디는 %s 입니다.", member.getLoginId()));
+		model.addAttribute("replaceUri", "/usr/member/login");
 		return "common/redirect";
 	}
 }

@@ -61,11 +61,11 @@
 						return;
 				}
 
-				form.loginEmail.value = form.loginEmail.value.trim();
+				form.email.value = form.email.value.trim();
 
-				if ( form.loginEmail.value.length == 0 ) {
+				if ( form.email.value.length == 0 ) {
 						alert('이메일을 입력해주세요.');
-						form.loginEmail.focus();
+						form.email.focus();
 
 						return;
 				}
@@ -84,27 +84,27 @@
 			<tbody>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name = "loginId" placeholder="아이디를 입력해주세요."/></td>
+					<td><input type="text" name = "loginId" maxlength="30" placeholder="아이디를 입력해주세요."/></td>
 				</tr>
 				
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="text" name = "loginPw" placeholder="비밀번호를 입력해주세요."/></td>
+					<td><input type="text" name = "loginPw" maxlength="30" placeholder="비밀번호를 입력해주세요."/></td>
 				</tr>
 				
 				<tr>
 					<th>비밀번호 확인</th>
-					<td><input type="text" name = "loginPwConfirm" placeholder="비밀번호를 입력해주세요."/></td>
+					<td><input type="text" name = "loginPwConfirm" maxlength="30" placeholder="비밀번호를 입력해주세요."/></td>
 				</tr>
 				
 				<tr>
 					<th>이름</th>
-					<td><input type="text" name = "name" placeholder="이름을 입력해주세요."/></td>
+					<td><input type="text" name = "name" maxlength="30" placeholder="이름을 입력해주세요."/></td>
 				</tr>
 				
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" name = "loginEmail" placeholder="이메일을 입력해주세요."/></td>
+					<td><input type="email" name = "email" maxlength="50" placeholder="이메일을 입력해주세요."/></td>
 				</tr>
 				
 				<tr>

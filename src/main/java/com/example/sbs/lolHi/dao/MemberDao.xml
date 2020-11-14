@@ -17,7 +17,7 @@
 		updateDate = now(),
 		loginId = #{loginId},
 		loginPw = #{loginPw},
-		loginEmail = #{loginEmail},
+		email = #{email},
 		`name` = #{name}
 	</insert>
 	
@@ -27,16 +27,10 @@
 		WHERE loginId = #{loginId}
 	</select>
 	
-	<select id="getMemberByName" resultType="Member" parameterType="String">
+	<select id="getMemberByNameAndEmail" resultType="Member" parameterType = "String">
 		SELECT *
-		FROM member 
-		WHERE `name` = #{name}
-	</select>
-	
-	<select id="getMemberByEmail" resultType="Member" parameterType="String">
-		SELECT *
-		FROM member 
-		WHERE `loginEmail` = #{loginEmail}
+		FROM member
+		WHERE `name` = #{name} AND email = #{email}
 	</select>
 	
 	<select id="getMemberById" resultType="Member" parameterType = "int">
@@ -45,9 +39,10 @@
 		WHERE id = #{id}
 	</select>
 	
+	
+	
 	<update id="doModify" parameterType="map">
 		UPDATE member
-		
 		<set>
 			updateDate = NOW(),
 			

@@ -68,4 +68,7 @@
 		</table>
 	</form>
 	
+	<a href="findFindLoginId">아이디 찾기</a>
+	<a href="findFindLoginPw">비밀번호 찾기</a>
+	
 	<%@ include file = "../../part/foot.jspf" %>

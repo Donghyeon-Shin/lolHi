@@ -45,9 +45,17 @@ public class MemberService {
 		
 	}
 
-	public boolean isJoinAvailableName(String name) {
-		Member member = memberDao.getMemberByName(name);
+	public boolean isJoinAvailableName(String name, String email) {
+		Member member = memberDao.getMemberByNameAndEmail(name, email);
 
+		if ( name == null || name.length() == 0 ) {
+			return true;
+		}
+		
+		if ( email == null || email.length() == 0 ) {
+			return true;
+		}
+		
 		if ( member == null ) {
 			return true;
 		}
@@ -55,15 +63,10 @@ public class MemberService {
 		return false;
 	}
 
-	public boolean isJoinAvailableEmail(String loginEmail) {
+	public Member getMemberByNameAndEmail(String name, String email) {
 		
-		Member member = memberDao.getMemberByEmail(loginEmail);
-
-		if ( member == null ) {
-			return true;
-		}
-
-		return false;
+		return memberDao.getMemberByNameAndEmail(name, email);
+		
 	}
 
 }
