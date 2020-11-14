@@ -37,9 +37,10 @@ public class ReplyService {
 			if (actorMember != null) {
 				actorCanDelete = actorMember.getId() == reply.getMemberId();
 			}
+			
 
 			boolean actorCanModify = actorCanDelete;
-
+	
 			reply.getExtra().put("actorCanDelete", actorCanDelete);
 			reply.getExtra().put("actorCanModify", actorCanModify);
 			

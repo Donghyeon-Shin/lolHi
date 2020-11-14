@@ -59,11 +59,11 @@
 					<td>${articleReply.regDate}</td>
 					<td>${articleReply.body}</td>
 						<td>
-						<c:if test="${reply.extra.actorCanDelete}">
+						<c:if test="${articleReply.extra.actorCanDelete}">
 							<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false"
 								href="../reply/doDelete?id=${articleReply.id}&redirectUrl=${encodedCurrentUri}">삭제하기</a>
 						</c:if>								
-						<c:if test="${reply.extra.actorCanModify}">
+						<c:if test="${articleReply.extra.actorCanModify}">
 							<a
 								href="../reply/modify?id=${articleReply.id}&redirectUrl=${encodedCurrentUri}">수정하기</a>
 						</c:if>		
