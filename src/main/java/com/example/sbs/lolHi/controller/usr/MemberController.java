@@ -30,19 +30,40 @@ public class MemberController {
 	public String showDoJoin(@RequestParam Map<String, Object> param, Model model) {
 
 		String loginId = Util.getAsStr(param.get("loginId"), "");
+		String name = Util.getAsStr(param.get("name"), "");
+		String loginEmail = Util.getAsStr(param.get("loginEmail"), "");
 
 		if (loginId.length() == 0) {
 
 			model.addAttribute("msg", "로그인 아이디를 입력해주세요.");
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
+			
 		}
-
+	
 		boolean isJoinAvailableLoginId = memberService.isJoinAvailableLoginId(loginId);
+		boolean isJoinAvailableName = memberService.isJoinAvailableName(name);
+		boolean isJoinAvailableEmail = memberService.isJoinAvailableEmail(loginEmail);
 
 		if (isJoinAvailableLoginId == false) {
 
-			model.addAttribute("msg", String.format(" %s(은)는 이미 사용중인 아아디 입니다", loginId));
+			model.addAttribute("msg", String.format(" %s(은)는 이미 사용중인 아아디 입니다.", loginId));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+
+		}
+		
+		if (isJoinAvailableName == false) {
+
+			model.addAttribute("msg", String.format(" %s(은)는 이미 사용중인 닉네임 입니다.", name));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+
+		}
+		
+		if (isJoinAvailableEmail == false) {
+
+			model.addAttribute("msg", String.format(" %s(은)는 이미 사용중인 이메일 입니다.", loginEmail));
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
 
@@ -50,7 +71,7 @@ public class MemberController {
 
 		memberService.join(param);
 		
-		model.addAttribute("msg", String.format(" %s님 가입되었습니다.", loginId));
+		model.addAttribute("msg", String.format(" %s님 가입되었습니다.", name));
 		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}

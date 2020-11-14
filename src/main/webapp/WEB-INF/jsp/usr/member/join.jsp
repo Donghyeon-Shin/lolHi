@@ -44,8 +44,6 @@
 						return;
 					}
 
-				form.name.value = form.name.value.trim();
-
 				if ( form.loginPwConfirm.value != form.loginPw.value ) {
 					
 					alert('비밀번호가 일치하지 않습니다.');
@@ -53,13 +51,24 @@
 
 					return;
 				}
+				
+				form.name.value = form.name.value.trim();
 
 				if ( form.name.value.length == 0 ) {
 						alert('이름을 입력해주세요.');
 						form.name.focus();
 
 						return;
-					}
+				}
+
+				form.loginEmail.value = form.loginEmail.value.trim();
+
+				if ( form.loginEmail.value.length == 0 ) {
+						alert('이메일을 입력해주세요.');
+						form.loginEmail.focus();
+
+						return;
+				}
 
 				form.submit();
 				joinFormSubmitDone = true;
@@ -91,6 +100,11 @@
 				<tr>
 					<th>이름</th>
 					<td><input type="text" name = "name" placeholder="이름을 입력해주세요."/></td>
+				</tr>
+				
+				<tr>
+					<th>이메일</th>
+					<td><input type="text" name = "loginEmail" placeholder="이메일을 입력해주세요."/></td>
 				</tr>
 				
 				<tr>

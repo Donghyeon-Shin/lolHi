@@ -17,6 +17,7 @@
 		updateDate = now(),
 		loginId = #{loginId},
 		loginPw = #{loginPw},
+		loginEmail = #{loginEmail},
 		`name` = #{name}
 	</insert>
 	
@@ -24,6 +25,18 @@
 		SELECT *
 		FROM member 
 		WHERE loginId = #{loginId}
+	</select>
+	
+	<select id="getMemberByName" resultType="Member" parameterType="String">
+		SELECT *
+		FROM member 
+		WHERE `name` = #{name}
+	</select>
+	
+	<select id="getMemberByEmail" resultType="Member" parameterType="String">
+		SELECT *
+		FROM member 
+		WHERE `loginEmail` = #{loginEmail}
 	</select>
 	
 	<select id="getMemberById" resultType="Member" parameterType = "int">

@@ -20,4 +20,8 @@ public interface MemberDao {
 
 	void doModify(Map<String, Object> param);
 
+	Member getMemberByName(String name);
+
+	Member getMemberByEmail(String loginEmail);
+
 }
