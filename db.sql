@@ -120,4 +120,8 @@ SET regDate = NOW(),
 `name` = '자유게시판',
 `code` = 'free';
 
+#현재 회원 비밀번호 암호화
+UPDATE `member`
+SET loginPw = SHA2(loginPw, 256);
+
 SELECT * FROM `member`;

@@ -125,6 +125,34 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
+	@RequestMapping("usr/member/confirmPw")
+	public String showConfirmPw(Model model, String url) {
+		
+		model.addAttribute("url", url);
+		
+		return "usr/member/confirmPw";
+	}
+	
+	@RequestMapping("usr/member/doConfirmPw")
+	public String showDoConfirmPw(HttpServletRequest req, Model model, String loginPw, String url) {
+		
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
+		Member member = memberService.getMemberById(loginedMemberId);
+		String encryptPw = SecurityUtil.encryptSHA256(loginPw);
+		
+		if ( !member.getLoginPw().equals(encryptPw)) {
+			model.addAttribute("msg", String.format(" 비밀번호가 올바르지 않습니다." ));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		model.addAttribute("msg", String.format("확인 되었습니다."));
+		model.addAttribute("replaceUri", url);
+		return "common/redirect";
+	}
+	
+	
 	@RequestMapping("usr/member/modify")
 	public String showModify() {
 	
