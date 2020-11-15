@@ -104,7 +104,7 @@ public class MemberService {
 		int password = (int)(Math.random() * 8999) + 1000;
 		
 		
-		String mailTitle = String.format("[%s] 임시 비밀번호.", siteName);
+		String mailTitle = String.format("[%s] 임시 비밀번호를 발송하였습니다.", siteName);
 
 		//임시비밀번호를 SHA-256 암호화해서 DB에 전달 
 		String encryptPassword = SecurityUtil.encryptSHA256(Integer.toString(password));
@@ -112,9 +112,9 @@ public class MemberService {
 		memberDao.ChangePasswordByloginId(loginId , encryptPassword);
 		
 		StringBuilder mailBodySb = new StringBuilder();
-		mailBodySb.append("<h1>임시비밀번호가 전달되었습니다.</h1>");
+		mailBodySb.append("<h1>임시비밀번호를 발송하였습니다.</h1>");
 		mailBodySb.append(String.format("임시비밀번호 : %d", password));
-		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
+		mailBodySb.append(String.format("<br><a href=\"%s\" target=\"_blank\">%s</a>로 이동</br>", siteMainUri, siteName));
 
 		mailService.send(email, mailTitle, mailBodySb.toString());
 		

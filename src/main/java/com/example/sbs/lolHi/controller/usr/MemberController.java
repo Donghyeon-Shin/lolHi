@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sbs.lolHi.dto.Member;
 import com.example.sbs.lolHi.service.MemberService;
+import com.example.sbs.lolHi.util.SecurityUtil;
 import com.example.sbs.lolHi.util.Util;
 
 @Controller
@@ -77,8 +78,8 @@ public class MemberController {
 
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 
-		String loginPw = (String) (param.get("loginPw"));
-
+		String loginPw = SecurityUtil.encryptSHA256((String)(param.get("loginPw")));
+		
 		if (loginId.length() == 0) {
 
 			model.addAttribute("msg", "로그인 아이디를 입력해주세요.");
