@@ -34,6 +34,10 @@ public class MemberController {
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 		String name = Util.getAsStr(param.get("name"), "");
 		String email = Util.getAsStr(param.get("email"), "");
+		
+		String encryptPw = SecurityUtil.encryptSHA256((String)(param.get("loginPw")));
+		
+		param.put("loginPw", encryptPw);
 
 		if (loginId.length() == 0) {
 
@@ -80,7 +84,7 @@ public class MemberController {
 
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 
-		String loginPw = SecurityUtil.encryptSHA256((String)(param.get("loginPw")));
+		String encryptPw = SecurityUtil.encryptSHA256((String)(param.get("loginPw")));
 		
 		if (loginId.length() == 0) {
 
@@ -95,7 +99,7 @@ public class MemberController {
 			model.addAttribute("msg", String.format(" %s(은)는 존재하지 않는 아아디 입니다", loginId));
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
-		} else if (member.getLoginPw().equals(loginPw) == false) {
+		} else if (member.getLoginPw().equals(encryptPw) == false) {
 
 			model.addAttribute("msg", "비밀번호를 정확히 입력해주세요.");
 			model.addAttribute("historyBack", true);
