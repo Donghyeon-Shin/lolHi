@@ -10,7 +10,7 @@ import com.example.sbs.lolHi.dto.Member;
 @Mapper
 public interface MemberDao {
 
-	Member login(Map<String, Object> param);
+	Member doLoginByloginId(@Param("loginId")String loginId);
 
 	void join(Map<String, Object> param);
 
@@ -22,6 +22,8 @@ public interface MemberDao {
 	
 	Member getMemberByNameAndEmail(String name, String email);
 
-	void ChangePasswordByloginId(@Param("loginId")String loginId, @Param("loginPw")int loginPw);
+	void ChangePasswordByloginId(@Param("loginId")String loginId,@Param("loginPw") String loginPw);
+
+	
 
 }

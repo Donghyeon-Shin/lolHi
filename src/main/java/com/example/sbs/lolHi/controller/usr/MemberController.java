@@ -86,7 +86,7 @@ public class MemberController {
 			return "common/redirect";
 		}
 
-		Member member = memberService.login(param);
+		Member member = memberService.doLoginByloginId(loginId);
 
 		if (member == null) {
 			model.addAttribute("msg", String.format(" %s(은)는 존재하지 않는 아아디 입니다", loginId));

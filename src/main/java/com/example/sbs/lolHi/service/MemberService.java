@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.sbs.lolHi.dao.MemberDao;
 import com.example.sbs.lolHi.dto.Member;
+import com.example.sbs.lolHi.util.SecurityUtil;
 
 @Service
 public class MemberService {
@@ -24,10 +25,11 @@ public class MemberService {
 	@Autowired
 	private MailService mailService;
 	
-	public Member login(Map<String, Object> param) {
+	public Member doLoginByloginId(String loginId) {
 		// TODO Auto-generated method stub
-		return memberDao.login(param);
+		return memberDao.doLoginByloginId(loginId);
 	}
+
 
 	public void join(Map<String, Object> param) {
 		memberDao.join(param);
@@ -101,9 +103,13 @@ public class MemberService {
 		
 		int password = (int)(Math.random() * 8999) + 1000;
 		
+		
 		String mailTitle = String.format("[%s] 임시 비밀번호.", siteName);
 
-		memberDao.ChangePasswordByloginId(loginId , password);
+		//임시비밀번호를 SHA-256 암호화해서 DB에 전달 
+		String encryptPassword = SecurityUtil.encryptSHA256(Integer.toString(password));
+		
+		memberDao.ChangePasswordByloginId(loginId , encryptPassword);
 		
 		StringBuilder mailBodySb = new StringBuilder();
 		mailBodySb.append("<h1>임시비밀번호가 전달되었습니다.</h1>");
@@ -114,5 +120,7 @@ public class MemberService {
 		
 		return true;
 	}
+
+
 
 }
