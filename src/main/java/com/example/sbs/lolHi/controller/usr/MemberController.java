@@ -167,4 +167,30 @@ public class MemberController {
 		model.addAttribute("replaceUri", "/usr/member/login");
 		return "common/redirect";
 	}
+	
+	@RequestMapping("usr/member/findLoginPw")
+	public String showFindLoginPw() {
+		
+		return "usr/member/findLoginPw";
+	}
+	
+	@RequestMapping("usr/member/doFindLoginPw")
+	public String showDoFindLoginPw(Model model,@RequestParam Map<String, Object> param) {
+		
+		String loginId = Util.getAsStr(param.get("loginId"), "");
+		String email = Util.getAsStr(param.get("email"), "");
+		
+		boolean successChangeLoginPw =  memberService.CheckLoginIdAndEmail(loginId, email);
+		
+		if ( successChangeLoginPw == false) {
+			model.addAttribute("msg", " 로그인 아이디 또는 이메일이 존재하지 않습니다");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		
+		model.addAttribute("msg", " 해당 메일로 임시 비밀번호를 전달했습니다.");
+		model.addAttribute("replaceUri", "/usr/member/login");
+		return "common/redirect";
+	}
 }

@@ -93,8 +93,7 @@ public class ArticleController {
 		model.addAttribute("page", page);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
-		
-		
+				
 		return "usr/article/list";
 	}
 	

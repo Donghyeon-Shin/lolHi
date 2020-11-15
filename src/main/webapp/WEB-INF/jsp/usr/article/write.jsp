@@ -51,7 +51,7 @@
 		<tbody>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" placeholder="제목을 입력해주세요." /></td>
+				<td><input type="text" name="title" maxlength="50" placeholder="제목을 입력해주세요." /></td>
 			</tr>
 
 			<tr>

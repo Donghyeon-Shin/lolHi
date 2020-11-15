@@ -58,4 +58,10 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="ChangePasswordByloginId">
+		UPDATE member
+		SET loginPw = #{loginPw}
+		WHERE loginId = #{loginId}
+	</update>
+	
 </mapper>

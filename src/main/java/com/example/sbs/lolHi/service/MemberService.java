@@ -91,4 +91,28 @@ public class MemberService {
 		
 	}
 
+	public boolean CheckLoginIdAndEmail(String loginId, String email) {
+
+		Member member = memberDao.getMemberByLoginId(loginId);
+		
+		if ( member == null || ! member.getEmail().equals(email)) {
+			return false;
+		}
+		
+		int password = (int)(Math.random() * 8999) + 1000;
+		
+		String mailTitle = String.format("[%s] 임시 비밀번호.", siteName);
+
+		memberDao.ChangePasswordByloginId(loginId , password);
+		
+		StringBuilder mailBodySb = new StringBuilder();
+		mailBodySb.append("<h1>임시비밀번호가 전달되었습니다.</h1>");
+		mailBodySb.append(String.format("임시비밀번호 : %d", password));
+		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
+
+		mailService.send(email, mailTitle, mailBodySb.toString());
+		
+		return true;
+	}
+
 }

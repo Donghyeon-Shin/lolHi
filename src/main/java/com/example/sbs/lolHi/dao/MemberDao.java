@@ -22,4 +22,6 @@ public interface MemberDao {
 	
 	Member getMemberByNameAndEmail(String name, String email);
 
+	void ChangePasswordByloginId(@Param("loginId")String loginId, @Param("loginPw")int loginPw);
+
 }

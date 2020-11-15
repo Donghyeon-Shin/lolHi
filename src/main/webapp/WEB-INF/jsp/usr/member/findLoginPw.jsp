@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	<c:set var = "pageName" value = "로그인 아이디 찾기" />
+	<c:set var = "pageName" value = "로그인 비밀번호 찾기" />
 	<%@ include file = "../../part/head.jspf" %>
 	
 	<script>
@@ -17,11 +17,11 @@
 					return;
 				}
 
-				form.name.value = form.name.value.trim();
+				form.loginId.value = form.loginId.value.trim();
 
-				if ( form.name.value.length == 0 ) {
-						alert('이름을 입력해주세요.');
-						form.name.focus();
+				if ( form.loginId.value.length == 0 ) {
+						alert('로그인 아이디를 입력해주세요.');
+						form.loginId.focus();
 						return;
 					}
 
@@ -39,11 +39,11 @@
 			}
 	</script>
 
-	<form action="./doFindLoginId" method="POST" onsubmit="findLoginIdSubmit(this); return false;">
+	<form action="./doFindLoginPw" method="POST" onsubmit="findLoginIdSubmit(this); return false;">
 
 
 		<div>
-			이름 : <input type="text" name="name" maxlength="30" placeholder="이름을 입력해주세요." />
+			로그인 아이디 : <input type="text" name="loginId" maxlength="30" placeholder="로그인 아이디를 입력해주세요." />
 		</div>
 		
 		<div>

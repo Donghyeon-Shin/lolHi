@@ -18,7 +18,7 @@
 		</div>
 
 		<div>
-			이름 : <input type="text" name="name" placeholder="이름을 입력해주세요."
+			이름 : <input type="text" name="name" maxlength="30" placeholder="이름을 입력해주세요."
 						value="${requestScope.loginedMember.name}" />
 		</div>
 		<div>

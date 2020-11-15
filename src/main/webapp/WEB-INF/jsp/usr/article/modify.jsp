@@ -48,7 +48,7 @@
 
 	<div>번호 : ${article.id}</div>
 	<div>
-		제목 : <input type="text" name="title" placeholder="제목을 입력해주세요."
+		제목 : <input type="text" name="title" maxlength="50" placeholder="제목을 입력해주세요."
 			value="${article.title}" />
 	</div>
 
