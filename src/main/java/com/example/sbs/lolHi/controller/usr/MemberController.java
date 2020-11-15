@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sbs.lolHi.dto.Member;
+import com.example.sbs.lolHi.dto.ResultData;
 import com.example.sbs.lolHi.service.MemberService;
 import com.example.sbs.lolHi.util.SecurityUtil;
 import com.example.sbs.lolHi.util.Util;
@@ -60,6 +61,7 @@ public class MemberController {
 			return "common/redirect";
 
 		}
+		
 		memberService.join(param);
 		
 		model.addAttribute("msg", String.format(" %s님 가입되었습니다.", name));
@@ -181,16 +183,18 @@ public class MemberController {
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 		String email = Util.getAsStr(param.get("email"), "");
 		
-		boolean successChangeLoginPw =  memberService.CheckLoginIdAndEmail(loginId, email);
-		
-		if ( successChangeLoginPw == false) {
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		if ( member == null || ! member.getEmail().equals(email)) {
 			model.addAttribute("msg", " 로그인 아이디 또는 이메일이 존재하지 않습니다");
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
 		}
 		
+		ResultData setTempPasswordAndNotifyRsData = memberService.setTempPasswordAndNotify(member);
 		
-		model.addAttribute("msg", " 해당 메일로 임시 비밀번호를 전달했습니다.");
+		
+		model.addAttribute("msg", String.format(setTempPasswordAndNotifyRsData.getMsg()));
 		model.addAttribute("replaceUri", "/usr/member/login");
 		return "common/redirect";
 	}

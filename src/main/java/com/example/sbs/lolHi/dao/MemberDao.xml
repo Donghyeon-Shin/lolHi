@@ -49,8 +49,8 @@
 				`name` = #{name},
 			</if>
 			
-			<if test="body != null">
-				body = #{body},
+			<if test="loginPw != null">
+				loginPw = #{loginPw},
 			</if>
 			
 		</set>

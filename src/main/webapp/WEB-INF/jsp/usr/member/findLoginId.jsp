@@ -47,7 +47,7 @@
 		</div>
 		
 		<div>
-			이메일 : <input type="text" name="email" maxlength="50" placeholder="이메일을 입력해주세요."/>
+			이메일 : <input type="email" name="email" maxlength="50" placeholder="이메일을 입력해주세요."/>
 		</div>
 		<div>
 			<input type="submit" value="찾기">
