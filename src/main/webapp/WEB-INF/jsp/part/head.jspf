@@ -15,7 +15,7 @@
 	<c:if test="${isLogined}">
 		<div>${loginedMember.name}님 환영합니다.</div>
 		<a href="../member/doLogout">로그아웃</a>
-		<a href="../member/confirmPw?url=/usr/member/modify">회원정보 수정</a>
+		<a href="../member/confirmPw?redirectUrl=/usr/member/modify">회원정보 수정</a>
 		<c:if test="${board.code != NULL}">
 			<a href="write">게시글 생성</a>
 		</c:if>

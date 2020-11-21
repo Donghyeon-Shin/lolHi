@@ -126,15 +126,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("usr/member/confirmPw")
-	public String showConfirmPw(Model model, String url) {
+	public String showConfirmPw(Model model, String redirectUrl) {
 		
-		model.addAttribute("url", url);
+		model.addAttribute("redirectUrl", redirectUrl);
 		
 		return "usr/member/confirmPw";
 	}
 	
 	@RequestMapping("usr/member/doConfirmPw")
-	public String showDoConfirmPw(HttpServletRequest req, Model model, String loginPw, String url) {
+	public String showDoConfirmPw(HttpServletRequest req, Model model, String loginPw, String redirectUrl) {
 		
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		
@@ -147,8 +147,13 @@ public class MemberController {
 			return "common/redirect";
 		}
 		
+		if (redirectUrl == null || redirectUrl.length() == 0) {
+			redirectUrl = "/usr/home/main";
+		}
+
+		
 		model.addAttribute("msg", String.format("확인 되었습니다."));
-		model.addAttribute("replaceUri", url);
+		model.addAttribute("replaceUri", redirectUrl);
 		return "common/redirect";
 	}
 	
@@ -228,6 +233,38 @@ public class MemberController {
 		
 		model.addAttribute("msg", String.format(setTempPasswordAndNotifyRsData.getMsg()));
 		model.addAttribute("replaceUri", "/usr/member/login");
+		return "common/redirect";
+	}
+	
+	@RequestMapping("usr/member/changePw")
+	public String showChangePw() {
+		
+		return "usr/member/changePw";
+	}
+	
+	@RequestMapping("usr/member/doChangePw")
+	public String showDoChangePw(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
+		
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
+		Member member = memberService.getMemberById(loginedMemberId);
+		
+		String encryptPw = SecurityUtil.encryptSHA256((String)param.get("loginPw"));
+		
+		if ( member.getLoginPw().equals(encryptPw)) {
+			model.addAttribute("msg", String.format(" 현재 사용중인 로그인 비밀번호 입니다." ));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		param.put("loginPw", encryptPw);
+		param.put("id", member.getId());
+	
+		memberService.doModify(param);
+		
+		
+		model.addAttribute("msg", String.format(" 비밀번호가 수정되었습니다." ));
+		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
 }

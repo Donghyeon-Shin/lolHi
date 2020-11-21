@@ -4,8 +4,34 @@
 
 	<c:set var = "pageName" value = "회원정보 수정" />
 	<%@ include file = "../../part/head.jspf" %>
+	
+	<script>
 
-	<form action="./doModify" method="POST">
+		var modifyFormSubmitDone = false;
+		
+		function modifyFormSubmit(form) {
+
+				if ( modifyFormSubmitDone ) {
+					alert('처리중 입니다.');
+
+					return;
+				}
+
+				form.name.value = form.name.value.trim();
+
+				if ( form.name.value.length == 0 ) {
+						alert('이름을 입력해주세요.');
+						form.name.focus();
+						return;
+					}
+
+				form.submit();
+				modifyFormSubmitDone = true;
+			
+			}
+	</script>
+
+	<form action="./doModify" method="POST" onsubmit="modifyFormSubmit(this); return false;">
 
 		<div>
 			번호 : ${loginedMember.id}
@@ -28,7 +54,9 @@
 	</form>
 	
 	<div>
-		<a onclick="history.back();">뒤로가기</a>
+		<a href="../member/confirmPw?redirectUrl=/usr/member/changePw">비밀번호 변경</a>
+	
+		<a href="../home/main">돌아가기</a>
 	</div>
 
 	<%@ include file = "../../part/foot.jspf" %>

@@ -35,7 +35,7 @@
 		<form action="doConfirmPw" method="POST"
 		onsubmit="confirmPwFormSubmit(this); return false;">
 		
-		<input type="hidden" name="url" value="${url}" />
+		<input type="hidden" name="redirectUrl" value="${redirectUrl}" />
 		
 		<table>
 		
