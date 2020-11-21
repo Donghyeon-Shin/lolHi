@@ -66,7 +66,7 @@ CREATE TABLE `member`(
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-loginId = 'sbs123',
+loginId = 'sbsst',
 loginPw = 'sbs123414',
 email = 'sbs123@gmail.com',
 `name` = 'admin'; 
@@ -93,6 +93,7 @@ CREATE TABLE reply(
 # 댓글 데이터 생성
 INSERT INTO reply
 SET regDate = NOW(),
+updateDate = NOW(),
 memberId = 1,
 relId = 1,
 relTypeCode = 'article',
@@ -147,5 +148,3 @@ ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
 
 # attr에 만료날짜 추가
 ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
-
-

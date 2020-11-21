@@ -14,4 +14,8 @@ public class Member {
 	private String email;
 	private String name;
 	
+	
+	public boolean isAdmin() {
+		return "sbsst".equals(loginId);
+	}
 }

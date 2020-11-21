@@ -99,7 +99,7 @@ public class MemberController {
 			model.addAttribute("msg", String.format(" %s(은)는 존재하지 않는 아아디 입니다", loginId));
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
-		} else if (member.getLoginPw().equals(encryptPw) == false) {
+		} else if (!member.getLoginPw().equals(encryptPw)) {
 
 			model.addAttribute("msg", "비밀번호를 정확히 입력해주세요.");
 			model.addAttribute("historyBack", true);
@@ -126,7 +126,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("usr/member/checkPw")
-	public String showConfirmPw(Model model, String redirectUrl) {
+	public String showCheckPw(Model model, String redirectUrl) {
 		
 		model.addAttribute("redirectUrl", redirectUrl);
 		
@@ -134,7 +134,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("usr/member/doCheckPw")
-	public String showDoConfirmPw(HttpServletRequest req, Model model, String loginPw, String redirectUrl) {
+	public String showDoCheckPw(HttpServletRequest req, Model model, String loginPw, String redirectUrl) {
 		
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
 		String encryptPw = SecurityUtil.encryptSHA256(loginPw);

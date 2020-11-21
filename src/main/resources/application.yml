@@ -31,7 +31,7 @@ server:
     include-binding-errors: always
 custom:
   siteName: 롤하이
-  siteMainUri: http://localhost:8085/usr/article-free/list
+  siteMainUri: http://localhost:8085/usr/home/main
   emailFrom: no-reply@localhost
   emailFromName: 롤하이 이메일 메니저
   logging:

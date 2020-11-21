@@ -5,12 +5,6 @@
 	<c:set var = "pageName" value = "${board.name} - 리스트" />
 	
 	<%@ include file="../../part/head.jspf"%>
-	
-	<div>
-		<a href="../article-free/list">자유게시판으로 이동</a>
-		<a href="../article-notice/list">공지사항으로 이동</a>
-	</div>
-	
 	<div class="con margin-top-30">
 	<span>
 		<span>총 게시물 수 : </span>
