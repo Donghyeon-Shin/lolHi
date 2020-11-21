@@ -46,7 +46,7 @@
 	}
 </script>
 
-<form action="./doChangePw" method="POST"
+<form action="./doChangeLoginPw" method="POST"
 	onsubmit="ChangePwFormSubmit(this); return false;">
 
 	<div>

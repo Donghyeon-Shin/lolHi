@@ -32,7 +32,7 @@
 			}
 	</script>
 	
-		<form action="doConfirmPw" method="POST"
+		<form action="doCheckPw" method="POST"
 		onsubmit="confirmPwFormSubmit(this); return false;">
 		
 		<input type="hidden" name="redirectUrl" value="${redirectUrl}" />

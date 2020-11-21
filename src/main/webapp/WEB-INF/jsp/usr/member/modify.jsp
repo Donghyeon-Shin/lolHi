@@ -34,6 +34,10 @@
 	<form action="./doModify" method="POST" onsubmit="modifyFormSubmit(this); return false;">
 
 		<div>
+			<input type="hidden" name = "checkLoginPwAuthCode" value="${checkLoginPwAuthCode}"/>  
+		</div>
+
+		<div>
 			번호 : ${loginedMember.id}
 		</div>
 		<div>
@@ -54,7 +58,7 @@
 	</form>
 	
 	<div>
-		<a href="../member/confirmPw?redirectUrl=/usr/member/changePw">비밀번호 변경</a>
+		<a href="../member/changeLoginPw?checkLoginPwAuthCode=${checkLoginPwAuthCode}">비밀번호 변경</a>
 	
 		<a href="../home/main">돌아가기</a>
 	</div>

@@ -3,6 +3,7 @@ package com.example.sbs.lolHi.util;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 
 public class Util {
 
@@ -90,6 +91,14 @@ public class Util {
 
 	public static String getNewUriAndEncoded(String uri, String paramName, String pramValue) {
 		return getUriEncoded(getNewUri(uri, paramName, pramValue));
+	}
+	
+	public static String getDateStrLater(int seconds) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		String dateStr = format1.format(System.currentTimeMillis() + seconds * 1000);
+
+		return dateStr;
 	}
 
 }
