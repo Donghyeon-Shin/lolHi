@@ -184,9 +184,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping("usr/member/doModify")
-	public String showDoModify(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
+	public String showDoModify(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String checkLoginPwAuthCode) {
 		
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		if (checkLoginPwAuthCode == null || checkLoginPwAuthCode.length() == 0) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "비밀번호 체크 인증코드가 없습니다.");
+			return "common/redirect";
+		}
+
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		ResultData checkValidCheckPasswordAuthCodeResultData = memberService
+				.checkValidCheckLoginPwAuthCode(loginedMemberId, checkLoginPwAuthCode);
+
+		if (checkValidCheckPasswordAuthCodeResultData.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", checkValidCheckPasswordAuthCodeResultData.getMsg());
+			return "common/redirect";
+		}
 		
 		param.put("id", loginedMemberId);
 		
@@ -276,13 +291,30 @@ public class MemberController {
 			return "common/redirect";
 		}
 		
+		model.addAttribute("checkLoginPwAuthCode", checkLoginPwAuthCode);
+		
 		return "usr/member/changeLoginPw";
 	}
 	
 	@RequestMapping("usr/member/doChangeLoginPw")
-	public String showDoChangePw(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
+	public String showDoChangePw(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String checkLoginPwAuthCode) {
 		
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
+		if (checkLoginPwAuthCode == null || checkLoginPwAuthCode.length() == 0) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "비밀번호 체크 인증코드가 없습니다.");
+			return "common/redirect";
+		}
+
+		ResultData checkValidCheckPasswordAuthCodeResultData = memberService
+				.checkValidCheckLoginPwAuthCode(loginedMemberId, checkLoginPwAuthCode);
+
+		if (checkValidCheckPasswordAuthCodeResultData.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", checkValidCheckPasswordAuthCodeResultData.getMsg());
+			return "common/redirect";
+		}
 		
 		Member member = memberService.getMemberById(loginedMemberId);
 		

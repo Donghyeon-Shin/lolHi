@@ -50,6 +50,11 @@
 	onsubmit="ChangePwFormSubmit(this); return false;">
 
 	<div>
+		<input type="hidden" name="checkLoginPwAuthCode"
+			value="${checkLoginPwAuthCode}" />
+	</div>
+
+	<div>
 		새 비밀번호 : <input type="text" name="loginPw" maxlength="30"
 			placeholder="비밀번호를 입력해주세요." />
 
