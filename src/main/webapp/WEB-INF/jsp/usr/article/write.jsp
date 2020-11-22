@@ -41,34 +41,45 @@
 	}
 </script>
 
-<form action="./doWrite" method="POST"
-	onsubmit="writeFormSubmit(this); return false;">
+<div class="write-article-box con-min-width">
+	<div class="con">
 
-	<input type="hidden" name="memberId" value="${loginedMemberId}" />
-	<input type="hidden" name="boardCode" value="${board.code}" />
+		<form class="form-box-type-1" action="./doWrite" method="POST"
+			onsubmit="writeFormSubmit(this); return false;">
 
-	<table>
-		<tbody>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="title" maxlength="50" placeholder="제목을 입력해주세요." /></td>
-			</tr>
+			<input type="hidden" name="memberId" value="${loginedMemberId}" />
+			<input type="hidden" name="boardCode" value="${board.code}" />
 
-			<tr>
-				<th>내용</th>
-				<td><textarea name="body" placeholder="내용을 입력해주세요."></textarea></td>
-			</tr>
+			<div>
+				<div>
+					<span>제목</span>
+				</div>
+				<div>
+					<input type="text" name="title" maxlength="30"
+						placeholder="제목을 입력해주세요." />
+				</div>
+			</div>
 
-			<tr>
-				<th>작성</th>
-				<td><button onclick="if ( confirm('작성하시겠습니까?') == false) return false;"
-					type="submit">작성</button></td>
-			</tr>
-		</tbody>
+			<div>
+				<div>
+					<span>내용</span>
+				</div>
+				<div>
+					<textarea maxlength="2000" name="body" placeholder="내용을 입력해주세요."></textarea>
+				</div>
+			</div>
 
-	</table>
-</form>
-
-<a onclick="history.back();">뒤로가기</a>
+			<div>
+				<div>
+					<span>작성</span>
+				</div>
+				<div>
+					<input onclick="if ( confirm('작성하시겠습니까?') == false) return false;"
+						type="submit" value="작성"/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 
 <%@ include file="../../part/foot.jspf"%>

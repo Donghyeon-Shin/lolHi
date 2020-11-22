@@ -70,7 +70,6 @@
 
 	<update id="doModify" parameterType="map">
 		UPDATE article
-		
 		<set>
 			updateDate = NOW(),
 			

@@ -31,26 +31,56 @@
 	}
 </script>
 
-<form action="./doModify" method="POST" onsubmit="modifyFormSubmit(this); return false;" >
+<div class="modify-reply-box con-min-width">
+	<div class="con">
+
+		<form class="form-box-type-1" action="./doModify" method="POST"
+			onsubmit="modifyFormSubmit(this); return false;">
 
 
-	<input type="hidden" name="redirectUrl" value="${redirectUrl}" />
-	<input type="hidden" name="id" value="${reply.id}" />
+			<input type="hidden" name="redirectUrl" value="${redirectUrl}" />
+			<input type="hidden" name="id" value="${reply.id}" />
 
-	<div>번호 : ${reply.id}</div>
 
-	<div>
-		내용 :
-		<textarea name="body" placeholder="내용을 입력해주세요.">${reply.body}</textarea>
+			<div>
+				<div>
+					<span>번호</span>
+				</div>
+				<div>
+					<span>${reply.id}</span>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>번호</span>
+				</div>
+				<div>
+					<span>${reply.id}</span>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>내용</span>
+				</div>
+				<div>
+					<textarea name="body" maxlength="300" placeholder="내용을 입력해주세요.">${reply.body}</textarea>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>수정</span>
+				</div>
+				<div>
+					<input onclick="if ( confirm('수정하시겠습니까?') == false) return false;"
+						type="submit" value="수정" />
+				</div>
+			</div>
+		</form>
+
 	</div>
-
-	<div>
-		<button onclick="if ( confirm('수정하시겠습니까?') == false) return false;"
-			type="submit">수정</button>
-	</div>
-
-</form>
-
-<a onclick="history.back();">뒤로가기</a>
+</div>
 
 <%@ include file="../../part/foot.jspf"%>

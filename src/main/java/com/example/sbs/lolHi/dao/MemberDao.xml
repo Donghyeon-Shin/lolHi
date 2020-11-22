@@ -48,7 +48,6 @@
 			<if test="name != null">
 				`name` = #{name},
 			</if>
-			sdh
 			<if test="loginPw != null">
 				loginPw = #{loginPw},
 			</if>

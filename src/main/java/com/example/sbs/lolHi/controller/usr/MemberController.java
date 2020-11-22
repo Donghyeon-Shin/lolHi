@@ -375,9 +375,9 @@ public class MemberController {
 		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
-
+	
 	@RequestMapping("/usr/member/doAuthEmail")
-	public String doAuthEmail(Model model, int actorId, String email, String authCode) {
+	public String showDoAuthEmail(Model model, int actorId, String email, String authCode) {
 		Member member = memberService.getMemberById(actorId);
 
 		if (member == null) {
@@ -406,5 +406,5 @@ public class MemberController {
 		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
-
+	
 }

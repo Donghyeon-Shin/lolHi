@@ -46,30 +46,50 @@
 	}
 </script>
 
-<form action="./doChangeLoginPw" method="POST"
-	onsubmit="ChangePwFormSubmit(this); return false;">
 
-	<div>
-		<input type="hidden" name="checkLoginPwAuthCode"
-			value="${checkLoginPwAuthCode}" />
+<div class="changeLoginPw-box con-min-width">
+	<div class="con">
+
+		<form class="form-box-type-1" action="./doChangeLoginPw" method="POST"
+			onsubmit="ChangePwFormSubmit(this); return false;">
+
+			<div>
+				<input type="hidden" name="checkLoginPwAuthCode"
+					value="${checkLoginPwAuthCode}" />
+			</div>
+
+			<div>
+				<div>
+					<span>새 비밀번호</span>
+				</div>
+				<div>
+					<input type="text" name="loginPw" maxlength="30"
+						placeholder="비밀번호를 입력해주세요." />
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span> 새 비밀번호 확인 : </span>
+				</div>
+				<div>
+					<input type="password" name="loginPwConfirm" maxlength="30"
+						placeholder="비밀번호 확인을 입력해주세요." />
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>변경</span>
+				</div>
+				<div>
+					<input type="submit" onclick="if ( confirm('변경하시겠습니까?') == false) return false;" value="변경">
+				</div>
+			</div>
+		</form>
+
 	</div>
-
-	<div>
-		새 비밀번호 : <input type="text" name="loginPw" maxlength="30"
-			placeholder="비밀번호를 입력해주세요." />
-
-	</div>
-
-	<div>
-		새 비밀번호 확인 : <input type="text" name="loginPwConfirm" maxlength="30"
-			placeholder="비밀번호 확인을 입력해주세요." />
-	</div>
-
-	<div>
-		<input type="submit" value="변경">
-	</div>
-
-</form>
+</div>
 
 
 <%@ include file="../../part/foot.jspf"%>

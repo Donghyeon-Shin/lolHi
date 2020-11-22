@@ -2,57 +2,66 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	<c:set var = "pageName" value = "비밀번호 확인" />
-	<%@ include file = "../../part/head.jspf" %>
-	
-	<script>
+<c:set var="pageName" value="비밀번호 확인" />
+<%@ include file="../../part/head.jspf"%>
 
-		var confirmPwFormSubmitDone = false;
-		
-		function confirmPwFormSubmit(form) {
+<script>
+	var confirmPwFormSubmitDone = false;
 
-				if ( confirmPwFormSubmitDone ) {
-					alert('처리중 입니다.');
+	function confirmPwFormSubmit(form) {
 
-					return;
-				}
+		if (confirmPwFormSubmitDone) {
+			alert('처리중 입니다.');
 
-				form.loginPw.value = form.loginPw.value.trim();
+			return;
+		}
 
-				if ( form.loginPw.value.length == 0 ) {
-						alert('비밀번호를 입력해주세요.');
-						form.loginPw.focus();
+		form.loginPw.value = form.loginPw.value.trim();
 
-						return;
-					}
+		if (form.loginPw.value.length == 0) {
+			alert('비밀번호를 입력해주세요.');
+			form.loginPw.focus();
 
-				form.submit();
-				confirmPwFormSubmitDone = true;
-			
-			}
-	</script>
-	
-		<form action="doCheckPw" method="POST"
-		onsubmit="confirmPwFormSubmit(this); return false;">
-		
-		<input type="hidden" name="redirectUrl" value="${redirectUrl}" />
-		
-		<table>
-		
-			<tbody>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="text" name = "loginPw" maxlength="30" placeholder="비밀번호를 입력해주세요."/></td>
-				</tr>
-				
-				<tr>
-					<th>작성</th>
-					<td><input type="submit" value="작성"></td>
-				</tr>
-			</tbody>
-		
-		</table>
-	</form>
-	
+			return;
+		}
 
-	<%@ include file = "../../part/foot.jspf" %>
+		form.submit();
+		confirmPwFormSubmitDone = true;
+
+	}
+</script>
+
+
+<div class="checkPw-box con-min-width">
+	<div class="con">
+
+		<form class="form-box-type-1" action="doCheckPw" method="POST"
+			onsubmit="confirmPwFormSubmit(this); return false;">
+
+			<input type="hidden" name="redirectUrl" value="${redirectUrl}" />
+
+			<div>
+				<div>
+					<span>비밀번호</span>
+				</div>
+				<div>
+					<input type="text" name="loginPw" maxlength="30"
+						placeholder="비밀번호를 입력해주세요." />
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>확인</span>
+				</div>
+				<div>
+					<input type="submit" value="확인">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+<%@ include file="../../part/foot.jspf"%>

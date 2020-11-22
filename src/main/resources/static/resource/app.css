@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* 노말 라이즈 */
-body, ul, li {
+body, ul, li, h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -41,11 +41,26 @@ a {
 
 .flex-jc-sb {
 	justify-content: space-between;
-	
+}
+
+.flex-jc-e {
+	justify-content: flex-end;
+}
+
+.flex-1-0-0 {
+	flex: 1 0 0;
+}
+
+.flex-grow-1 {
+	flex-grow: 1;
 }
 
 .height-100p {
 	height: 100%;
+}
+
+.bd-red {
+	border: 4px solid red;
 }
 
 .bg-red {
@@ -66,13 +81,25 @@ html {
 }
 
 /* 로고바 시작 */
-
 .logo-bar {
 	background-color: black;
+	color: white;
 }
 
-.logo-bar>a {
+.logo-bar__logo {
 	width: 150px;
+}
+
+.logo-bar__avatar {
+	width: 50px;
+	height: 50px;
+	background-color: white;
+	color: black;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
 }
 /* 로고바 끝 */
 
@@ -83,41 +110,100 @@ html {
 	color: white;
 }
 
-.top-bar__menu-box-1>ul>li>a {
+.top-bar__menu-box>ul>li>a {
 	padding: 0 10px;
 	font-weight: bold;
 	min-width: 70px;
 	border-radius: 10px 10px 0 0;
 }
 
-.top-bar__menu-box-1>ul>li:hover>a {
+.top-bar__menu-box>ul>li:hover>a {
 	background-color: white;
 	color: black;
 }
 
-.top-bar__menu-box-1>ul>li>a>span:first-child {
-	font-size: 0.7rem;
-	margin-right: 5px;
-	margin-top: 4px;
-}
-
-
-.top-bar__menu-box-2>ul>li>a {
-	padding: 0 10px;
-	font-weight: bold;
-	min-width: 70px;
-	border-radius: 10px 10px 0 0;
-}
-
-.top-bar__menu-box-2>ul>li:hover>a {
-	background-color: white;
-	color: black;
-}
-
-.top-bar__menu-box-2>ul>li>a>span:first-child {
+.top-bar__menu-box>ul>li>a>span:first-child {
 	font-size: 0.7rem;
 	margin-right: 5px;
 	margin-top: 4px;
 }
 
 /* 탑 끝 */
+
+/* 타이틀 바 시작 */
+.title-bar {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+/* 타이틀 바 끝 */
+
+/* 폼 박스 타입1 시작 */
+.form-box-type-1>div {
+	display: flex;
+}
+
+.form-box-type-1>div {
+	margin-top: 10px;
+}
+
+.form-box-type-1>div>div:first-child {
+	min-width: 150px;
+	display: flex;
+	align-items: center;
+}
+
+.form-box-type-1>div>div:first-child>span {
+	font-weight: bold;
+}
+
+.form-box-type-1>div>div:last-child {
+	flex-grow: 1;
+}
+
+.form-box-type-1>div>div:last-child>input[type="text"], .form-box-type-1>div>div:last-child>input[type="password"],
+	.form-box-type-1>div>div:last-child>input[type="email"] {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.form-box-type-1>div>div:last-child>textarea {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	min-height: 300px;
+}
+
+.form-box-type-1>div>div:last-child>input[type="submit"],
+	.form-box-type-1>div>div:last-child>input[type="button"] {
+	border: 1px solid skyblue;
+	color: skyblue;
+	background-color: rgba(0, 0, 0, 0);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.form-box-type-1>div>div:last-child>input[type="submit"]:hover,
+	.form-box-type-1>div>div:last-child>input[type="button"]:hover {
+	color: white;
+	background-color: skyblue;
+}
+/* 폼 박스 타입1 끝 */
+
+/* 로그인 바 임시 시작 */
+.behind-login-bar {
+	background-color: rgb(243, 245, 247);
+}
+
+.front-login-bar {
+	background-color: white;
+	padding: 10px 30px;
+	box-shadow: 5px 5px;
+	width: 600px;
+}
+
+/* 로그인 바 임시 끝 */

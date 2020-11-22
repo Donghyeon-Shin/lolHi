@@ -41,28 +41,58 @@
 	}
 </script>
 
-<form action="./doModify" method="POST" onsubmit="modifyFormSubmit(this); return false;">
+<div class="modify-article-box con-min-width">
+	<div class="con">
+
+		<form class="form-box-type-1" action="./doModify" method="POST"
+			onsubmit="modifyFormSubmit(this); return false;">
 
 
-	<input type="hidden" name="id" value="${article.id}" />
+			<input type="hidden" name="id" value="${article.id}" />
 
-	<div>번호 : ${article.id}</div>
-	<div>
-		제목 : <input type="text" name="title" maxlength="50" placeholder="제목을 입력해주세요."
-			value="${article.title}" />
+			<div>
+				<div>
+					<span>번호</span>
+				</div>
+				<div>
+					<span>${article.id}</span>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>제목</span>
+				</div>
+				<div>
+					<input type="text" name="title" maxlength="30"
+						placeholder="제목을 입력해주세요." value="${article.title}" />
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>내용</span>
+				</div>
+				<div>
+					<textarea name="body" maxlength="2000" placeholder="내용을 입력해주세요.">${article.body}</textarea>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<span>수정</span>
+				</div>
+				<div>
+
+					<input onclick="if ( confirm('수정하시겠습니까?') == false) return false;"
+						type="submit" value="수정" />
+
+				</div>
+			</div>
+		</form>
+
 	</div>
+</div>
 
-	<div>
-		내용 :
-		<textarea name="body" placeholder="내용을 입력해주세요.">${article.body}</textarea>
-	</div>
-	<div>
-		<button onclick="if ( confirm('수정하시겠습니까?') == false) return false;"
-			type="submit">수정</button>
-	</div>
-
-</form>
-
-<a onclick="history.back();">뒤로가기</a>
 
 <%@ include file="../../part/foot.jspf"%>

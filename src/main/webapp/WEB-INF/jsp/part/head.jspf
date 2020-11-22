@@ -15,16 +15,26 @@
 <link rel="stylesheet" href="/resource/app.css" />
 </head>
 <body>
-	<div class="logo-bar con-min-width flex flex-jc-c">
-		<a href="/usr/home/main" class="logo block img-box">
-			<img src="/resource/img/logo_1.png" />
-		</a>
+	<div class="logo-bar con-min-width ">
+		<div class="con height-100p flex flex-jc-c">
+			<div class="flex-1-0-0"></div>
+			<a href="/usr/home/main" class="logo-bar__logo block img-box">
+				<img src="/resource/img/logo_1.png" />
+			</a>
+			<div class="flex-1-0-0 flex flex-ai-c flex-jc-e">
+				<c:if test="${isLogined}">
+					<div class="logo-bar__avatar">
+						<i class="far fa-user"></i>
+					</div>
+				</c:if>
+			</div>
+		</div>
 	</div>
 
 	<div class="top-bar con-min-width ">
 
 		<div class="con flex flex-jc-sb height-100p">
-			<nav class="top-bar__menu-box-1">
+			<nav class="top-bar__menu-box top-bar__menu-box-1">
 				<ul class="flex height-100p">
 					<li>
 						<a href="/usr/home/main"
@@ -76,7 +86,7 @@
 				</ul>
 			</nav>
 
-			<nav class="top-bar__menu-box-2">
+			<nav class="top-bar__menu-box top-bar__menu-box-2">
 				<ul class="flex height-100p">
 					<c:if test="${not isLogined}">
 						<li>
@@ -119,7 +129,8 @@
 					</c:if>
 					<c:if test="${isLogined}">
 						<li>
-							<a href="/usr/member/doLogout"
+							<a onclick="if ( confirm('로그아웃 하시겠습니까?') == false) return false;"
+								href="/usr/member/doLogout"
 								class="height-100p flex flex-jc-c flex-ai-c">
 								<span>
 									<i class="fas fa-sign-out-alt"></i>
@@ -137,7 +148,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="/usr/member/checkPw?redirectUrl=doDelete"
+							<a onclick="if ( confirm('정말로 탈퇴하시겠습니까?') == false) return false;"
+							href="/usr/member/checkPw?redirectUrl=doDelete"
 								class="height-100p flex flex-jc-c flex-ai-c">
 								<span>
 									<i class="fas fa-user-slash"></i>
@@ -149,23 +161,6 @@
 				</ul>
 			</nav>
 
-			<!-- 
-					<c:if test="${isLogined}">
-			<div>${loginedMember.name}님환영합니다.</div>
-			<a href="../member/doLogout">로그아웃</a>
-			<a href="../member/checkPw?redirectUrl=/usr/member/modify">회원정보
-				수정</a>
-			<c:if test="${board.code != NULL}">
-				<a href="write">게시글 생성</a>
-			</c:if>
-		</c:if>
-
-		<c:if test="${not isLogined}">
-			<a href="../member/join">회원가입</a>
-			<a href="../member/login">로그인</a>
-		</c:if>
-			
- -->
 		</div>
 
 
