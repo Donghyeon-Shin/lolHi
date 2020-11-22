@@ -115,7 +115,7 @@
 								<span>비밀번호 찾기</span>
 							</a>
 						</li>
-						
+
 					</c:if>
 					<c:if test="${isLogined}">
 						<li>
@@ -134,6 +134,15 @@
 									<i class="fas fa-user-edit"></i>
 								</span>
 								<span>정보수정</span>
+							</a>
+						</li>
+						<li>
+							<a href="/usr/member/checkPw?redirectUrl=doDelete"
+								class="height-100p flex flex-jc-c flex-ai-c">
+								<span>
+									<i class="fas fa-user-slash"></i>
+								</span>
+								<span>회원탈퇴</span>
 							</a>
 						</li>
 					</c:if>

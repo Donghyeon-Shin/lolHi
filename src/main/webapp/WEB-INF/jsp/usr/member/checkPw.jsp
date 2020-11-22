@@ -54,6 +54,5 @@
 		</table>
 	</form>
 	
-	<a href="../home/main">돌아가기</a>
-	
+
 	<%@ include file = "../../part/foot.jspf" %>

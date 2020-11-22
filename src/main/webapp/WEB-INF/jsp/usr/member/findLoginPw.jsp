@@ -54,9 +54,5 @@
 		</div>
 		
 	</form>
-	
-	<div>
-		<a onclick="history.back();">뒤로가기</a>
-	</div>
 
 	<%@ include file = "../../part/foot.jspf" %>

@@ -5,8 +5,6 @@
 	<c:set var = "pageName" value = "로그인" />
 	<%@ include file = "../../part/head.jspf" %>
 	
-	<a href="../article-free/list">리스트</a>
-	
 	<script>
 		var loginFormSubmitDone = false;
 	
@@ -67,8 +65,5 @@
 		
 		</table>
 	</form>
-	
-	<a href="findLoginId">아이디 찾기</a>
-	<a href="findLoginPw">비밀번호 찾기</a>
 	
 	<%@ include file = "../../part/foot.jspf" %>

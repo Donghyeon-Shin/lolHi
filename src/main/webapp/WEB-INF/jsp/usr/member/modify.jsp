@@ -60,7 +60,6 @@
 	<div>
 		<a href="../member/changeLoginPw?checkLoginPwAuthCode=${checkLoginPwAuthCode}">비밀번호 변경</a>
 	
-		<a href="../home/main">돌아가기</a>
 	</div>
 
 	<%@ include file = "../../part/foot.jspf" %>

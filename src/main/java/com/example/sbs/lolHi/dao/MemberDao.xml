@@ -48,7 +48,7 @@
 			<if test="name != null">
 				`name` = #{name},
 			</if>
-			
+			sdh
 			<if test="loginPw != null">
 				loginPw = #{loginPw},
 			</if>
@@ -62,5 +62,10 @@
 		SET loginPw = #{loginPw}
 		WHERE loginId = #{loginId}
 	</update>
+	
+	<delete id="doDelete">
+		DELETE FROM `member`
+		WHERE id = #{id}
+	</delete>
 	
 </mapper>

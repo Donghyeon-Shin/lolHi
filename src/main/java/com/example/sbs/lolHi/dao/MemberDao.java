@@ -24,6 +24,8 @@ public interface MemberDao {
 
 	void ChangePasswordByloginId(@Param("loginId")String loginId,@Param("loginPw") String loginPw);
 
+	void doDelete(@Param("id")int loginedMemberId);
+
 	
 
 }
