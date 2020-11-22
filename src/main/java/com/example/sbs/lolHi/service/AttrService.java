@@ -86,4 +86,9 @@ public class AttrService {
 
 		return -1;
 	}
+
+	public int setValue(String name, String value) {
+		return setValue(name, value, null);
+	}
+
 } 

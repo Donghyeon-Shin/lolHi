@@ -89,7 +89,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="/usr/member/login"
+							<a href="/usr/member/join"
 								class="height-100p flex flex-jc-c flex-ai-c">
 								<span>
 									<i class="fas fa-user"></i>

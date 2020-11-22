@@ -105,6 +105,15 @@ public class MemberController {
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
 		}
+		
+		String authedEmail = memberService.getAuthedEmail(member.getId());
+
+		if (authedEmail.equals(member.getEmail()) == false) {
+			model.addAttribute("msg", String.format("이메일 인증 후 시도해주세요."));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+
 
 		session.setAttribute("loginedMemberId", member.getId());
 
@@ -352,18 +361,50 @@ public class MemberController {
 			model.addAttribute("msg", checkValidCheckPasswordAuthCodeResultData.getMsg());
 			return "common/redirect";
 		}
-		
-		if(loginedMemberId == 1) {
+
+		if (loginedMemberId == 1) {
 			model.addAttribute("msg", "어드민은 탈퇴할 수 없습니다.");
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
 		}
 		session.removeAttribute("loginedMemberId");
-		
+
 		memberService.doDelete(loginedMemberId);
 
-		model.addAttribute("msg"," 성공적으로 탈퇴하였습니다.");
+		model.addAttribute("msg", " 성공적으로 탈퇴하였습니다.");
 		model.addAttribute("replaceUri", "/usr/home/main");
 		return "common/redirect";
 	}
+
+	@RequestMapping("/usr/member/doAuthEmail")
+	public String doAuthEmail(Model model, int actorId, String email, String authCode) {
+		Member member = memberService.getMemberById(actorId);
+
+		if (member == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			return "common/redirect";
+		}
+
+		if (member.getEmail().equals(email) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "이메일이 일치하지 않습니다.");
+			return "common/redirect";
+		}
+
+		String emailAuthCodeOnDb = memberService.getEmailAuthCode(actorId);
+
+		if (authCode.equals(emailAuthCodeOnDb) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "인증코드가 일치하지 않거나 만료되었습니다. 관리자에게 문의해주세요.");
+			return "common/redirect";
+		}
+
+		memberService.saveAuthedEmail(actorId, email);
+
+		model.addAttribute("msg", "이메일 인증에 성공하였습니다.");
+		model.addAttribute("replaceUri", "/usr/home/main");
+		return "common/redirect";
+	}
+
 }
