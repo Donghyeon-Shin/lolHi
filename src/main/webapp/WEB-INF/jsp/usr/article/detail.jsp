@@ -39,6 +39,8 @@
 	<button type="submit">작성</button>
 </form>
 
+<hr />
+
 <c:if test="${replyExists}">
 
 	<table border="1">

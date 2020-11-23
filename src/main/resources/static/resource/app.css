@@ -12,6 +12,11 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
 /* 라이브러리 */
 .con {
 	margin-left: auto;
@@ -157,7 +162,7 @@ html {
 }
 
 .form-box-type-1>div>div:last-child {
-	flex-grow: 1;
+	min-width: 500px;
 }
 
 .form-box-type-1>div>div:last-child>input[type="text"], .form-box-type-1>div>div:last-child>input[type="password"],
@@ -207,3 +212,85 @@ html {
 }
 
 /* 로그인 바 임시 끝 */
+
+/* 게시물 리스트 시작 */
+.present-page {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.present-page>div:last-child>span {
+	
+}
+
+.article-list-box {
+	margin-top: 30px;
+}
+
+.article-list-box__row {
+	display: flex;
+}
+
+.article-list-box__row>:nth-child(1) {
+	width: 80px;
+}
+
+.article-list-box__row>:nth-child(2), .article-list-box__row>:nth-child(3)
+	{
+	width: 180px;
+}
+
+.article-list-box__row>:nth-child(4) {
+	width: 180px;
+}
+
+.article-list-box__row>:nth-child(5) {
+	flex-grow: 1;
+}
+
+.article-list-box__row>:nth-child(5)>a {
+	display: block;
+}
+
+.article-list-box__row>:nth-child(6) {
+	width: 180px;
+}
+
+.article-list-box__row>:nth-child(7) {
+	width: 50px;
+}
+
+.article-list-box__head .article-list-box__row>div>span {
+	font-weight: bold;
+}
+
+.article-list-box__body .article-list-box__row {
+	margin-top: 50px;
+}
+
+.article-page-box {
+	justify-content: center;
+	display: flex;
+	margin-top: 40px;
+	text-align: center;
+}
+
+.article-page-box .article-page-box__row {
+	font-size: 20px;
+	width: 40px;
+}
+
+.article-page-box > div:nth-child(2) {
+	margin-left: 10px;
+	width: 50px;
+}
+
+.article-page-box > div:nth-child(9) {
+	margin-right: 10px;
+	width: 50px;
+}
+
+.article-page-box .article-page-box__currentPage {
+	color: red;
+}
+/* 게시물 리스트 끝 */

@@ -71,7 +71,7 @@ public class ArticleController {
 		
 		int pageMenuStart = page - pageMenuSize ;
 		
-		if ( pageMenuStart < 0 ) {
+		if ( pageMenuStart < 1 ) {
 			pageMenuStart = 1;
 		}
 		
