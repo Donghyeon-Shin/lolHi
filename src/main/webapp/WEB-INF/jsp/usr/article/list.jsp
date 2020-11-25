@@ -177,7 +177,7 @@
 		</c:if>
 	</div>
 
-	<div>
+	<div class = "article-page-box__leftNext">
 		<a
 			href="?page=${FiveMinPage}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">◀</a>
 
@@ -202,7 +202,7 @@
 		</div>
 	</c:forEach>
 
-	<div>
+	<div class = "article-page-box__rightNext">
 		<c:set var="MaxPage" value="${page + 5 }" />
 		<c:if test="${page + 5 > totalPage}">
 			<c:set var="MaxPage" value="${totalPage}" />
