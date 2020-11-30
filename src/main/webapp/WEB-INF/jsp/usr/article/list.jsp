@@ -140,36 +140,23 @@
 </div>
 
 <div class="article-page-box con-min-width">
-	<c:set var="goFirstBtnNeedToShow" value="${page > pageMenuSize + 1 }" />
+
+	<!-- 현제 페이지를 페이지 크기로 나눠서 그 몫을 반올림해 페이지 넘버를 정함-->
+	<c:set var="pageNumber" value="${Math.ceil(page / pageMenuSize)}" />
+	
+	<!-- 현재 페이지가 페이지 사이즈보다 크면 첫번째 페이지로 이동할 수 있음-->
+	<c:set var="goFirstBtnNeedToShow" value="${page > pageMenuSize }" />
+
+	<!-- 마지막 페이지로 이동하는 경우는 forEach의 마지막 경우 말고는 다 허용 -->
 	<c:set var="goLastBtnNeedToShow" value="true" />
-	
-	<!-- 최대 2페이지가 넘어가면 그냥 최대 페이지를 보여주도록 -->
-	<c:set var="TwoMaxPage" value="${page + 2 }" />
-	<c:if test="${page + 2 > totalPage}">
-		<c:set var="TwoMaxPage" value="${totalPage}" />
-	</c:if>
 
-	<!-- 최소 2페이지가 넘어가면 그냥 최소 페이지를 보여주도록 -->
-	<c:set var="TwoMinPage" value="${page - 2}" />
-	<c:if test="${page - 2 < 1}">
-		<c:set var="TwoMinPage" value="1" />
-	</c:if>
-	
+	<!-- 현제 페이지가 1보다 크면 왼쪽으로 한 페이지 움직일 수 있음-->
+	<c:set var="goLeftNextBtnNeedToShow" value="${page > 1}" />
 
+	<!-- 현제 페이지가 마지막 페이지보다 작으면 오른쪽으로 한 페이지 움직일 수 있음-->
+	<c:set var="goRightNextBtnNeedToShow" value="${page < totalPage }" />
 
-	<!-- 최대 5페이지가 넘어가면 그냥 최대 페이지를 보여주도록 -->
-	<c:set var="FiveMaxPage" value="${page + 5 }" />
-	<c:if test="${page + 5 > totalPage}">
-		<c:set var="FiveMaxPage" value="${totalPage}" />
-	</c:if>
-
-	<!-- 최소 5페이지가 넘어가면 그냥 최소 페이지를 보여주도록 -->
-	<c:set var="FiveMinPage" value="${page - 5}" />
-	<c:if test="${page - 5 < 1}">
-		<c:set var="FiveMinPage" value="1" />
-	</c:if>
-
-
+	<!-- 첫번째 페이지 이동 버튼 구현 -->
 	<div>
 		<c:if test="${goFirstBtnNeedToShow}">
 			<a
@@ -177,13 +164,27 @@
 		</c:if>
 	</div>
 
-	<div class = "article-page-box__leftNext">
-		<a
-			href="?page=${FiveMinPage}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">◀</a>
-
+	<!-- 왼쪽 한 페이지 이동 버튼 구현 -->
+	<div class="article-page-box__leftNext">
+		<c:if test="${goLeftNextBtnNeedToShow}">
+			<a
+				href="?page=${page - 1}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">◀</a>
+		</c:if>
 	</div>
 
-	<c:forEach var="i" begin="${TwoMinPage}" end="${TwoMaxPage}">
+	<!-- 페이지 넘버를 통해 몇번째 페이지부터 보여줄지 계산 -->
+	<c:set var="pageToStart" value="${(pageNumber - 1 ) * 5 + 1}" />
+
+	<!-- 페이지 넘버를 통해 몇번째 페이지까지 보여줄지 계산 -->
+	<c:set var="pageToEnd" value="${(pageNumber - 1 ) * 5 + 5}" />
+
+	<!-- 만약 pageToEnd가 totalPage보다 크면 pageToEnd를 totalPage로 변경-->
+	<c:if test="${pageToEnd >= totalPage}">
+		<c:set var="pageToEnd" value="${totalPage}" />
+	</c:if>
+
+	<!-- 페이지 리스팅 구현 -->
+	<c:forEach var="i" begin="${pageToStart}" end="${pageToEnd}">
 		<div class="article-page-box__row">
 			<c:if test="${page == i}">
 				<a class="article-page-box__currentPage"
@@ -202,16 +203,15 @@
 		</div>
 	</c:forEach>
 
-	<div class = "article-page-box__rightNext">
-		<c:set var="MaxPage" value="${page + 5 }" />
-		<c:if test="${page + 5 > totalPage}">
-			<c:set var="MaxPage" value="${totalPage}" />
+	<!-- 오른쪽으로 한 페이지 이동 버튼 구현 -->
+	<div class="article-page-box__rightNext">
+		<c:if test="${goRightNextBtnNeedToShow}">
+			<a
+				href="?page=${page + 1}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">▶</a>
 		</c:if>
-
-		<a
-			href="?page=${FiveMaxPage}&boardCode=${board.code}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}">▶</a>
 	</div>
 
+	<!-- 마지막 페이지 이동 버튼 구현 -->
 	<div>
 		<c:if test="${goLastBtnNeedToShow}">
 			<a
@@ -219,5 +219,6 @@
 		</c:if>
 
 	</div>
+
 </div>
 <%@ include file="../../part/foot.jspf"%>
