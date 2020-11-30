@@ -65,6 +65,13 @@ public class ArticleController {
 
 		int page = Util.getAsInt(param.get("page"), 1);
 		
+		// 만약 접속 페이지가 전체 페이지보다 크거나 첫페이지보다 작다면 1페이지로 이동시킴
+		if ( page > totalPage || page < 1) {
+			model.addAttribute("msg", "올바르지 않은 접근입니다.");
+			model.addAttribute("replaceUri", String.format("/usr/article-%s/list", board.getCode()));
+			return "common/redirect";
+		}
+
 		int pageMenuSize = 5;
 
 		int pageMenuStart = page - pageMenuSize;
